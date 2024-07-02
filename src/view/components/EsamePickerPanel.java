@@ -1,3 +1,10 @@
+/**
+ * @file EsamePickerPanel.java
+ * 
+ * Pannello composto da due pulsanti destinato alla selezione del tipo di esame.
+ * A seconda della scelta, verrà mostrato il form da compilare adatto.
+ */
+
 package view.components;
 
 import java.awt.event.ActionListener;
@@ -13,7 +20,6 @@ public class EsamePickerPanel extends JPanel {
 	public EsamePickerPanel(SidePanel sidePanel) {
 		esameSempliceBtn = new JButton("Esame Semplice");
 		esameCompostoBtn = new JButton("Esame Composto");
-		
 		
 		esameSempliceBtn.addActionListener(sidePanel);
 		esameCompostoBtn.addActionListener(sidePanel);

@@ -1,3 +1,11 @@
+/**
+ * @file CardPanel.java
+ * 
+ * Pannello destinato al contenimento dei due form EsameSemplicePanel e EsameCompostoPanel.
+ * Attraverso l'utilizzo di un CardLayout, è possibile mostrare uno dei due form, nascondendo allo stesso tempo l'altro.
+ */
+
+
 package view.components;
 
 import javax.swing.JButton;
@@ -38,11 +46,9 @@ public class CardPanel extends JPanel{
 		this.view = view;
 	}
 
-	
 	public CardLayout getCardLayout() {
 		return cardLayout;
 	}
-
 	public void setCardLayout(CardLayout cardLayout) {
 		this.cardLayout = cardLayout;
 	}

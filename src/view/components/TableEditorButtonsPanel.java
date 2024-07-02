@@ -1,6 +1,5 @@
 package view.components;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,6 +28,7 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		setController(controller);
 		setTable(table);
 		setTableModel((DefaultTableModel) table.getModel());
+		
 		initializePanel();
 	}
 	
@@ -45,7 +45,6 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		String buttonName = ((JButton) e.getSource()).getText();
 		if(buttonName == "Rimuovi") {
 			rimuoviRiga();

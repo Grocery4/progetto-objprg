@@ -1,3 +1,9 @@
+/**
+* @file FormActionsInterface.java
+* 
+* Interfaccia che definisce le azioni comuni alle classi EsameCompostoPanel e EsameSemplicePanel.
+*/
+
 package view.components;
 
 import java.awt.event.ActionEvent;
