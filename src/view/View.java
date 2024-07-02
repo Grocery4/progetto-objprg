@@ -1,4 +1,10 @@
-/** @file View.java */
+/**
+ * @file View.java
+ * 
+ * Questa classe rappresenta la finestra principale dell'applicazione del sistema di gestione degli esami.
+ * Si occupa della gestione del frame e dell'integrazione dei vari componenti dell'interfaccia utente, oltre
+ * alla comunicazione con il controller.
+ */
 
 package view;
 
@@ -28,20 +34,32 @@ public class View extends JFrame {
 	private JScrollPane tableScrollPane;
 	private EsamiTable table;
 	
-	
+    /**
+     * Costruttore per la classe View.
+     *
+     * @param controller L'oggetto che gestisce la logica dell'applicazione.
+    */
 	public View(Controller controller) {
 		setController(controller);
-		initializeView();
+		initializeFrameSettings();
+		initializeFramePanels();
 	}
 	
-	private void initializeView(){
+	/**
+	 * Inizializza il frame, layout, titolo, comportamento di chiusura e le dimensioni predefinite.
+	*/
+	private void initializeFrameSettings() {
 		frameLayout = new BorderLayout();
 		setLayout(frameLayout);
 		setTitle("Gestore Esami");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setBounds(200,200, 1200, 700);
-		
+	}
+	/**
+	 * Inizializza i pannelli principali del frame.
+	*/
+	private void initializeFramePanels() {
 		sidePanel = new SidePanel(this);
 		add(sidePanel, BorderLayout.WEST);
 		
@@ -54,7 +72,6 @@ public class View extends JFrame {
 		editorPanel = new TableEditorButtonsPanel(controller, table);
 		add(editorPanel, BorderLayout.SOUTH);
 	}
-	
 	
 	public Controller getController() {
 		return controller;
