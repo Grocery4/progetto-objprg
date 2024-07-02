@@ -20,7 +20,6 @@ import view.errors.ExistingEntryException;
  * La classe Controller è responsabile della comunicazione tra View e Model.
  */
 
-//TODO vedere se i metodi in Model devono essere spostati in Controller
 //TODO vedere se in ogni metodo Map<I,E> mappaEsami può essere sostituito da un eventuale attributo di classe, piuttosto che ridichiararlo ogni volta
 public class Controller {
 	private Model model;

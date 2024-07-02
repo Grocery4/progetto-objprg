@@ -1,14 +1,14 @@
-/** @file Esame.java */
-
+/** @file Esame.java 
+ *  Questa classe astratta rappresenta un esame e definisce i metodi e gli attributi comuni ai due tipi di esami.
+ */
 package model.esami;
 
 /* 
  * L'idea è quella di creare una GUI in modo tale da costringere il programma
  * ad avere sempre il numero giusto di parametri, per esempio presentando un errore
  * in caso di valori nulli, così da non dover passare valori "vuoti" all'oggetto.
-*/
+ */
 public abstract class Esame{
-	/** Attributi di un singolo esame */
 	//TODO aggiungere data
 	private int ID;
 	private int matricola;
@@ -20,8 +20,17 @@ public abstract class Esame{
 	private boolean lode;
 	
 	
-	// Inizializzazione con i valori 'standard'
-	Esame(int matricola, String nome, String cognome, String nomeInsegnamento, int creditiInsegnamento){
+    /**
+     * Costruttore della classe Esame. 
+     * Setta i valori degli attributi non specifici per il tipo di esame.
+     * 
+     * @param matricola Numero di matricola dello studente.
+     * @param nome Nome dello studente.
+     * @param cognome Cognome dello studente.
+     * @param nomeInsegnamento Nome dell'insegnamento.
+     * @param creditiInsegnamento Crediti dell'insegnamento.
+     */
+	public Esame(int matricola, String nome, String cognome, String nomeInsegnamento, int creditiInsegnamento){
 		setMatricola(matricola);
 		setNome(nome);
 		setCognome(cognome);
@@ -71,13 +80,17 @@ public abstract class Esame{
 		this.votoFinale = votoFinale;
 	}
 
-	/** 
-	 * La lode può essere attribuita solo se lode==true && votoFinale==30,
-	 * è quindi necessario che la lode venga settata solo DOPO aver stabilito il valore di votoFinale
-	*/
+
 	public boolean isLode() {
 		return lode;
 	}
+	/** 
+	 * Metodo che stabilisce se attribuire o meno la lode.
+	 * La lode può essere attribuita solo se lode==true && votoFinale==30,
+	 * è quindi necessario che la lode venga settata solo DOPO aver stabilito il valore di votoFinale
+	 * 
+	 * @param lode Indica se l'esame ha la lode.
+	 */
 	public void setLode(boolean lode) {
 		if(lode == true && getVotoFinale() == 30) {
 			this.lode = lode;			
@@ -86,7 +99,13 @@ public abstract class Esame{
 			this.lode = false;
 		}
 	}
-	
+	/** 
+	 * Metodo utilizzato per rappresentare sottoforma di stringa la lode.
+	 * Viene chiamato dai metodi EsameSemplice.toColumns() e EsameComposto.toColumns()
+	 * nel momento in cui è necessario mostrare i dati dell'esame nella tabella.
+	 * 
+	 *  @return "SI" se l'esame ha la lode, altrimenti "NO".
+	 */
 	public String lodeToString() {
 		if (isLode() == true) {
 			return "SI";
@@ -101,17 +120,23 @@ public abstract class Esame{
 	public void setCreditiInsegnamento(int creditiInsegnamento) {
 		this.creditiInsegnamento = creditiInsegnamento;
 	}
-
+	/** Metodo che compara due esami, controllando matricola e materia.
+	 * 
+	 * @param e Esame da comparare.
+	 * @return true se gli esami sono uguali, altrimenti false.
+	 */
 	public boolean equals(Esame e) {
-		// compara matricola e materia di ogni oggetto Esame
 		if(matricola == e.getMatricola() && nomeInsegnamento.equals(e.getNomeInsegnamento())) {
 			return true;
 		}
 		return false;
 	}
 	
-	/** A seconda del tipo di Esame, il metodo toColumns restituirà un array di String contenenti
-	 * i dati inerenti ad un esame semplice o composto. */
+	/** A seconda del tipo di Esame, il metodo toColumns() restituirà un array di String contenenti
+	 * i dati inerenti ad un esame semplice o composto.
+	 * 
+	 * @return Un array di stringhe contenente i dati dell'esame.
+	 */
 	public abstract String[] toColumns();
 
 }
