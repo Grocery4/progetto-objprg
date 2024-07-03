@@ -5,8 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -23,8 +26,11 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private JButton rimuoviRigaButton;
 	private JButton modificaRigaButton;
 	
+	private JLabel filterLabel;
 	private JTextArea filterTextArea;
-	private JButton btnFiltra;
+	private JComboBox<String> filterType;
+	private JButton filtraBtn;
+	private JButton resetFilterBtn;
 	
 	private Controller controller;
 	private JTable table;
@@ -41,20 +47,38 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private void initializePanel() {
 		rimuoviRigaButton = new JButton("Rimuovi");
 		modificaRigaButton = new JButton("Modifica");
-		btnFiltra = new JButton("Ricerca");
+		filterLabel = new JLabel("Filtra per: ");
 		filterTextArea = new JTextArea(1, 15);
+		filterType = new JComboBox<>(new String[] {"Matricola", "Materia"});
+		filtraBtn = new JButton("Cerca");
+		resetFilterBtn = new JButton("X");
 		
 		rimuoviRigaButton.addActionListener(this);
 		modificaRigaButton.addActionListener(this);
-		btnFiltra.addActionListener(this);
+		filtraBtn.addActionListener(this);
+		resetFilterBtn.addActionListener(this);
+		
 		filterTextArea.setBorder(new LineBorder(Color.BLACK, 1));
+		resetFilterBtn.setEnabled(false);
 		
 		add(rimuoviRigaButton);
 		add(modificaRigaButton);
+		add(filterLabel);
 		add(filterTextArea);
-		add(btnFiltra);
+		add(filterType);
+		add(filtraBtn);
+		add(resetFilterBtn);
 	}
-
+	
+	/**
+	 * Il metodo actionPerformed permette di identificare il pulsante schiacciato
+	 * e azionare il metodo associato.
+	 * 
+	 * Al momento viene utilizzato una catena di if per il processo di identificazione
+	 * poiché gli switch-case non accettano Stringhe come valori.
+	 * In futuro potrebbe essere implementato un meccanismo diverso tramite l'utilizzo
+	 * di switch + enum. 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = ((JButton) e.getSource()).getText();
@@ -63,48 +87,24 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		} 
 		else if (buttonName == "Modifica") {
 			controller.modificaRiga();
-		} else if (buttonName == "Ricerca") {
-			controller.filtraTabella();
+		} 
+		else if (buttonName == "Cerca") {
+			String query = filterTextArea.getText();
+			String filterName = (String) filterType.getSelectedItem();
+			
+			controller.filtraTabella(query, filterName);
+			
+			if(!query.isBlank()) {
+				filterTextArea.setText("");
+				resetFilterBtn.setEnabled(true);
+			}
+		} 
+		else if (buttonName == "X") {
+			controller.resetFilter();
+			resetFilterBtn.setEnabled(false);
 		}
 	}
-	
-	//TODO spostare metodi rimuoviRiga e modificaRiga in Model.java o Controller.java
-	private void rimuoviRiga() {
 
-	}
-	
-	private void modificaRiga() {
-		int row = table.getSelectedRow();
-		int column = table.getSelectedColumn();
-		
-		int ID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
-		Esame esame = controller.getModel().getEsame(ID);
-
-		JDialog dialog;
-		if(esame instanceof EsameSemplice) {
-			EsameSemplicePopUpPanel panel = new EsameSemplicePopUpPanel(controller.getView());
-			panel.getNomeTextArea().setText(esame.getNome());
-			panel.getCognomeTextArea().setText(esame.getCognome());
-			panel.getMatricolaTextArea().setText(String.valueOf(esame.getMatricola()));
-			panel.getMateriaTextArea().setText(esame.getNomeInsegnamento());
-			panel.getCfuTextArea().setText(String.valueOf(esame.getCreditiInsegnamento()));
-			panel.getVotoTextArea().setText(String.valueOf(esame.getVotoFinale()));
-			panel.getLodeCheckbox().setSelected(esame.isLode());
-			
-			panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-
-			dialog = new JDialog(controller.getView(), "Modifica Esame");
-			dialog.setContentPane(panel);
-			dialog.setModal(true);
-			dialog.pack();
-			dialog.setVisible(true);
-			
-		} else if (esame instanceof EsameComposto) {
-			EsameCompostoPanel panel = new EsameCompostoPanel(controller.getView());
-		}
-		
-	}
-	
 	public JTable getTable() {
 		return table;
 	}

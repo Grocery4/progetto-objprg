@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import controller.Controller;
 import model.Model;
@@ -16,11 +17,13 @@ import model.esami.EsameComposto;
 public class EsamiTable extends JTable{
 	private Controller controller;
 	private DefaultTableModel tableModel;
+	private TableRowSorter<DefaultTableModel> sorter;
 	
 	public EsamiTable(Controller controller, DefaultTableModel tableModel) {
 		super(tableModel);
 		setController(controller);
 		setTableModel(tableModel);
+		
 		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		addMouseListener(new MouseAdapter() {
 			//Doppio click per selezionare le celle
@@ -37,6 +40,9 @@ public class EsamiTable extends JTable{
 				if(noProveIntermedie > 1) {showProveIntermedie(row, column);}
 			}
 		});
+		
+		sorter = new TableRowSorter<>(tableModel);
+		setRowSorter(sorter);
 	}
 	
 	public Controller getController() {
@@ -57,5 +63,12 @@ public class EsamiTable extends JTable{
 	}
 	public void setTableModel(DefaultTableModel tableModel) {
 		this.tableModel = tableModel;
+	}
+
+	public TableRowSorter<DefaultTableModel> getSorter() {
+		return sorter;
+	}
+	public void setSorter(TableRowSorter<DefaultTableModel> sorter) {
+		this.sorter = sorter;
 	}
 }

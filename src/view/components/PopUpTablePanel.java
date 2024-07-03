@@ -10,7 +10,7 @@ public class PopUpTablePanel extends JPanel{
 	private DefaultTableModel tableModel;
 	private JTable table;
 	
-	public PopUpTablePanel(Float[] votoArray, Integer[] pesoArray) {
+	public PopUpTablePanel(Float[] votoArray, Float[] pesoArray) {
 		int initialNumRows = 0;
 		String[] columnHeadings = {"Voto", "Peso"};
 		tableModel = new DefaultTableModel(initialNumRows, columnHeadings.length) {
