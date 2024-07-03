@@ -71,13 +71,13 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	private int cfu;
 	private int numProveIntermedie;
 	
-	private Integer[] pesoArray;
+	private Float[] pesoArray;
 	private Float[] votoArray;
 	private boolean lode;
 	private float votoFinale;
 	
 	private List<Float> votoIntermedioArray;
-	private List<Integer> pesoIntermedioArray;
+	private List<Float> pesoIntermedioArray;
 	
 	
 	public EsameCompostoPanel(View view) {
@@ -338,11 +338,11 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 			try {
 				if(votoIntermedioTextArea.getText().isBlank() || pesoIntermedioTextArea.getText().isBlank()) {throw new NullInputsException("null values");}
 				if(Float.parseFloat(votoIntermedioTextArea.getText()) < 18 || Float.parseFloat(votoIntermedioTextArea.getText()) > 30) {throw new InvalidRangeException("voto fuori dall'intervallo");}
-				if(Integer.parseInt(pesoIntermedioTextArea.getText()) < 0 || Integer.parseInt(pesoIntermedioTextArea.getText()) > 100) {throw new InvalidRangeException("peso fuori dall'intervallo");}
+				if(Float.parseFloat(pesoIntermedioTextArea.getText()) < 0 || Float.parseFloat(pesoIntermedioTextArea.getText()) > 100) {throw new InvalidRangeException("peso fuori dall'intervallo");}
 				
 				if(arrayIndex < numProveIntermedie) {
 					float votoIntermedio = Float.parseFloat(votoIntermedioTextArea.getText());
-					int pesoIntermedioPercentage = Integer.parseInt(pesoIntermedioTextArea.getText());
+					float pesoIntermedioPercentage = Float.parseFloat(pesoIntermedioTextArea.getText());
 				
 					votoIntermedioArray.add(votoIntermedio);
 					pesoIntermedioArray.add(pesoIntermedioPercentage);
@@ -360,8 +360,9 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 					proveIntermedieTextArea.setText("Voti: " + votoIntermedioArray.toString() + "\n" + "Pesi: " + pesoIntermedioArray.toString());
 					proveIntermedieTextArea.setVisible(true);
 					
-					pesoArray = pesoIntermedioArray.toArray(new Integer[numProveIntermedie]);
+					pesoArray = pesoIntermedioArray.toArray(new Float[numProveIntermedie]);
 					votoArray = votoIntermedioArray.toArray(new Float[numProveIntermedie]);
+					
 					votoFinale = EsameComposto.calcolaVotoFinale(numProveIntermedie, pesoArray, votoArray);
 					
 					//votoFinale viene usato solo per mostrarne il valore nella GUI
@@ -414,7 +415,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	private void initializeArrays() {
 		arrayIndex = 0;
 		votoIntermedioArray = new ArrayList<Float>();
-		pesoIntermedioArray = new ArrayList<Integer>();
+		pesoIntermedioArray = new ArrayList<Float>();
 	}
 	
 	private void initializeForm() {
@@ -425,7 +426,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		cfu = 0;
 		numProveIntermedie = 0;
 	}
-
+	
 	public View getView() {
 		return view;
 	}
