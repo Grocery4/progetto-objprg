@@ -2,9 +2,11 @@
 
 package model.esami;
 
+import java.util.Arrays;
+
 public class EsameComposto extends Esame{
 	private int numeroProveIntermedie;
-	private Integer[] pesoProveIntermediePercentage;
+	private Float[] pesoProveIntermediePercentage;
 	private Float[] votiProveIntermedie;
 	
     /**
@@ -22,7 +24,7 @@ public class EsameComposto extends Esame{
      * @param votiProveIntermedie Voti ottenuti nelle prove intermedie.
      * @param lode Indica se l'esame ha la lode.
      */ 
-	public EsameComposto(int matricola, String nome, String cognome, String nomeInsegnamento, int creditiInsegnamento, int numeroProveIntermedie, Integer[] pesoProveIntermediePercentage, Float[] votiProveIntermedie, boolean lode) {
+	public EsameComposto(int matricola, String nome, String cognome, String nomeInsegnamento, int creditiInsegnamento, int numeroProveIntermedie, Float[] pesoProveIntermediePercentage, Float[] votiProveIntermedie, boolean lode) {
 		super(matricola, nome, cognome, nomeInsegnamento, creditiInsegnamento);
 		setNumeroProveIntermedie(numeroProveIntermedie);
 		setPesoProveIntermediePercentage(pesoProveIntermediePercentage);
@@ -41,22 +43,24 @@ public class EsameComposto extends Esame{
 	}
 	
     /**
-     * Calcola il voto finale facendo la media ponderata delle prove intermedie.
+     * Calcola il voto finale facendo la media ponderata delle prove intermedie dopo aver normalizzato i pesi.
      * @param numeroProveIntermedie Numero di prove intermedie.
      * @param pesoProveIntermediePercentage Percentuale di peso di ciascuna prova intermedia.
      * @param votiProveIntermedie Voti ottenuti nelle prove intermedie.
      * @return Il voto finale calcolato come media ponderata.
      */
-	public static float calcolaVotoFinale(int numeroProveIntermedie, Integer[] pesoProveIntermediePercentage, Float[] votiProveIntermedie) {
-		// mediaPonderata = (sum(votoIntermedio_i * pesoIntermedio_i))/sum(pesoIntermedio_i) da i = 1,...,n
-		float risultatoFinale, votoPonderato, sommaPesi;
-		risultatoFinale = votoPonderato = sommaPesi = 0;
-		for(int indiceVoto = 0; indiceVoto < numeroProveIntermedie; indiceVoto++) {
-			votoPonderato += votiProveIntermedie[indiceVoto]*pesoProveIntermediePercentage[indiceVoto];
-			sommaPesi += pesoProveIntermediePercentage[indiceVoto];
+	public static float calcolaVotoFinale(int numeroProveIntermedie, Float[] pesoProveIntermediePercentage, Float[] votiProveIntermedie) {
+		float sommaPesi, mediaPonderata;
+		sommaPesi = mediaPonderata = 0f;
+		
+		for (float peso : pesoProveIntermediePercentage) { sommaPesi += peso; }
+		for (int i=0; i<numeroProveIntermedie; i++) {
+			float pesoNormalizzato = pesoProveIntermediePercentage[i] / sommaPesi;
+			mediaPonderata += votiProveIntermedie[i] * pesoNormalizzato;
 		}
-		risultatoFinale = votoPonderato / sommaPesi;
-		return risultatoFinale;
+		
+		return mediaPonderata;
+		
 	}
 	
 	public int getNumeroProveIntermedie() {
@@ -66,10 +70,10 @@ public class EsameComposto extends Esame{
 		this.numeroProveIntermedie = numeroProveIntermedie;
 	}
 	
-	public Integer[] getPesoProveIntermediePercentage() {
+	public Float[] getPesoProveIntermediePercentage() {
 		return pesoProveIntermediePercentage;
 	}
-	public void setPesoProveIntermediePercentage(Integer[] pesoProveIntermediePercentage2) {
+	public void setPesoProveIntermediePercentage(Float[] pesoProveIntermediePercentage2) {
 		this.pesoProveIntermediePercentage = pesoProveIntermediePercentage2;
 	}
 

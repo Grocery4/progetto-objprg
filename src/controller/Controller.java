@@ -6,7 +6,10 @@ package controller;
 
 import java.util.Map;
 
+import javax.swing.BorderFactory;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
 import model.Model;
@@ -14,7 +17,11 @@ import model.esami.Esame;
 import model.esami.EsameComposto;
 import model.esami.EsameSemplice;
 import view.View;
+import view.components.ColumnHeaders;
+import view.components.EsameCompostoPanel;
+import view.components.EsameSemplicePopUpPanel;
 import view.components.EsamiTable;
+import view.components.TableEditorButtonsPanel;
 import view.errors.ExistingEntryException;
 
 
@@ -82,10 +89,73 @@ public class Controller {
         }
 	}
 	public void modificaRiga() {
+		EsamiTable table = view.getTable();
+		DefaultTableModel tableModel = model.getTableModel();
 		
+		int row = table.getSelectedRow();
+		int column = table.getSelectedColumn();
+		
+		int ID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+		Esame esame = getModel().getEsame(ID);
+
+		JDialog dialog;
+		if(esame instanceof EsameSemplice) {
+			EsameSemplicePopUpPanel panel = new EsameSemplicePopUpPanel(getView());
+			panel.getNomeTextArea().setText(esame.getNome());
+			panel.getCognomeTextArea().setText(esame.getCognome());
+			panel.getMatricolaTextArea().setText(String.valueOf(esame.getMatricola()));
+			panel.getMateriaTextArea().setText(esame.getNomeInsegnamento());
+			panel.getCfuTextArea().setText(String.valueOf(esame.getCreditiInsegnamento()));
+			panel.getVotoTextArea().setText(String.valueOf(esame.getVotoFinale()));
+			panel.getLodeCheckbox().setSelected(esame.isLode());
+			
+			panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+			dialog = new JDialog(getView(), "Modifica Esame");
+			dialog.setContentPane(panel);
+			dialog.setModal(true);
+			dialog.pack();
+			dialog.setVisible(true);
+			
+		} else if (esame instanceof EsameComposto) {
+			EsameCompostoPanel panel = new EsameCompostoPanel(getView());
+		}
 	}
-	public void filtraTabella() {
+	/**
+	 * Il seguente metodo filtra i dati nella tabella in base alla query e al tipo di filtro specificati.
+	 *
+	 * @param query      La stringa di ricerca utilizzata per filtrare i dati nella tabella. 
+	 *                   Se la query è vuota o contiene solo spazi, il metodo non applica alcun filtro.
+	 * @param filterType Il tipo di filtro utilizzato per determinare quale colonna della tabella deve essere filtrata.
+	 *                   Questo parametro è convertito in un identificatore di colonna tramite il metodo toEnum.
+	 */
+	public void filtraTabella(String query, String filterType) {
+		EsamiTable table = view.getTable();
+		int columnID = toEnum(filterType);
 		
+		if (query.isBlank()) {
+            return;
+        } else {
+        	table.getSorter().setRowFilter(RowFilter.regexFilter("(?i)^" + query + "$", columnID));
+        }
+	}
+	/**
+	 * Rimuove il filtro applicato alla tabella.
+	 */
+	public void resetFilter() {
+		EsamiTable table = view.getTable();
+		table.getSorter().setRowFilter(null);
+	}
+	/** 
+	 * Restituisce al chiamante l'id della colonna in base al tipo di filtrazione necessario.
+	 * 
+	 * @return ColumnHeaders Id della colonna. 
+	 */
+	private int toEnum(String filterType) {
+		if(filterType.toUpperCase().equalsIgnoreCase(ColumnHeaders.MATRICOLA.name())) {
+			return ColumnHeaders.MATRICOLA.ordinal();
+		}
+		return ColumnHeaders.MATERIA.ordinal();
 	}
 	
 	/** Aggiorna i dati stampati sulla tabella con le nuove informazioni ottenute. */
