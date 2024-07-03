@@ -1,5 +1,6 @@
 package view.components;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +10,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
@@ -19,6 +22,9 @@ import model.esami.EsameSemplice;
 public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private JButton rimuoviRigaButton;
 	private JButton modificaRigaButton;
+	
+	private JTextArea filterTextArea;
+	private JButton btnFiltra;
 	
 	private Controller controller;
 	private JTable table;
@@ -34,41 +40,37 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	
 	private void initializePanel() {
 		rimuoviRigaButton = new JButton("Rimuovi");
-		rimuoviRigaButton.addActionListener(this);
-		
 		modificaRigaButton = new JButton("Modifica");
+		btnFiltra = new JButton("Ricerca");
+		filterTextArea = new JTextArea(1, 15);
+		
+		rimuoviRigaButton.addActionListener(this);
 		modificaRigaButton.addActionListener(this);
+		btnFiltra.addActionListener(this);
+		filterTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		
 		add(rimuoviRigaButton);
 		add(modificaRigaButton);
+		add(filterTextArea);
+		add(btnFiltra);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = ((JButton) e.getSource()).getText();
 		if(buttonName == "Rimuovi") {
-			rimuoviRiga();
+			controller.rimuoviRiga();
 		} 
 		else if (buttonName == "Modifica") {
-			modificaRiga();
+			controller.modificaRiga();
+		} else if (buttonName == "Ricerca") {
+			controller.filtraTabella();
 		}
 	}
 	
-	//TODO spostare metodi rimuoviRiga e modificaRiga in Model.java
+	//TODO spostare metodi rimuoviRiga e modificaRiga in Model.java o Controller.java
 	private void rimuoviRiga() {
-		if(table.getSelectedRow() != -1) 
-        {
-			
-			//elimina esame dalla lista
-			int column = 0; //ID column
-			int row = table.getSelectedRow();
-			int ID = Integer.parseInt(tableModel.getValueAt(row, column).toString());
-			controller.eliminaEsame(ID);
-			
-			//elimina esame dal JTable
-			tableModel.removeRow(table.getSelectedRow());
-           JOptionPane.showMessageDialog(null, "Rimozione avvenuta con successo!");
-        }
+
 	}
 	
 	private void modificaRiga() {

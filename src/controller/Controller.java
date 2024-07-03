@@ -6,6 +6,7 @@ package controller;
 
 import java.util.Map;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Model;
@@ -13,6 +14,7 @@ import model.esami.Esame;
 import model.esami.EsameComposto;
 import model.esami.EsameSemplice;
 import view.View;
+import view.components.EsamiTable;
 import view.errors.ExistingEntryException;
 
 
@@ -62,6 +64,30 @@ public class Controller {
 		mappaEsami.remove(ID);
 	}
 	
+	public void rimuoviRiga() {
+		EsamiTable table = view.getTable();
+		DefaultTableModel tableModel = model.getTableModel();
+		
+		if(table.getSelectedRow() != -1) {
+			
+			//elimina esame dalla lista
+			int column = 0; //ID column
+			int row = table.getSelectedRow();
+			int ID = Integer.parseInt(tableModel.getValueAt(row, column).toString());
+			eliminaEsame(ID);
+			
+			//elimina esame dal JTable
+			tableModel.removeRow(table.getSelectedRow());
+           JOptionPane.showMessageDialog(null, "Rimozione avvenuta con successo!");
+        }
+	}
+	public void modificaRiga() {
+		
+	}
+	public void filtraTabella() {
+		
+	}
+	
 	/** Aggiorna i dati stampati sulla tabella con le nuove informazioni ottenute. */
 	private void aggiornaTabella(int ID, DefaultTableModel tableModel, Esame esameModificato){
 		tableModel.setValueAt(esameModificato.getMatricola(), ID, 1);
@@ -72,7 +98,6 @@ public class Controller {
 		tableModel.setValueAt(esameModificato.getVotoFinale(), ID, 7);
 		tableModel.setValueAt(esameModificato.lodeToString(), ID, 8);
 	}
-	
 	/** Controlla che non si stiano inserendo dei dati duplicati. 
 	* Se la chiave valutata è diversa dalla chiave dell'esame da modificare E l'esame in mappaEsami ha stessa matricola e materia,
 	* allora l'esame è già stato sostenuto.
