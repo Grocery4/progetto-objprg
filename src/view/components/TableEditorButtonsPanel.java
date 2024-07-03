@@ -31,6 +31,8 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private JComboBox<String> filterType;
 	private JButton filtraBtn;
 	private JButton resetFilterBtn;
+		
+	private JLabel votoMedioLabel;
 	
 	private Controller controller;
 	private JTable table;
@@ -53,6 +55,8 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		filtraBtn = new JButton("Cerca");
 		resetFilterBtn = new JButton("X");
 		
+		votoMedioLabel = new JLabel("Voto Medio: ");
+		
 		rimuoviRigaButton.addActionListener(this);
 		modificaRigaButton.addActionListener(this);
 		filtraBtn.addActionListener(this);
@@ -60,6 +64,7 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		
 		filterTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		resetFilterBtn.setEnabled(false);
+		votoMedioLabel.setVisible(false);
 		
 		add(rimuoviRigaButton);
 		add(modificaRigaButton);
@@ -68,6 +73,7 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		add(filterType);
 		add(filtraBtn);
 		add(resetFilterBtn);
+		add(votoMedioLabel);
 	}
 	
 	/**
@@ -97,11 +103,15 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 			if(!query.isBlank()) {
 				filterTextArea.setText("");
 				resetFilterBtn.setEnabled(true);
+				
+				votoMedioLabel.setText("Voto Medio: " + String.format("%.2f", (controller.calcolaVotoMedio())));
+				votoMedioLabel.setVisible(true);
 			}
 		} 
 		else if (buttonName == "X") {
 			controller.resetFilter();
 			resetFilterBtn.setEnabled(false);
+			votoMedioLabel.setVisible(false);
 		}
 	}
 

@@ -30,6 +30,7 @@ import view.errors.ExistingEntryException;
  */
 
 //TODO vedere se in ogni metodo Map<I,E> mappaEsami può essere sostituito da un eventuale attributo di classe, piuttosto che ridichiararlo ogni volta
+//TODO vedere se si può evitare di dichiarare in ogni metodo la variabile table
 public class Controller {
 	private Model model;
 	private View view;
@@ -145,6 +146,24 @@ public class Controller {
 	public void resetFilter() {
 		EsamiTable table = view.getTable();
 		table.getSorter().setRowFilter(null);
+	}
+	
+	public float calcolaVotoMedio() {
+		EsamiTable table = view.getTable();
+		DefaultTableModel tableModel = model.getTableModel();
+		
+		float sommaVoti, numeroVoti;
+		sommaVoti = numeroVoti = 0;
+		
+		for(int i=0; i < tableModel.getRowCount(); i++) {
+			if (table.getSorter().convertRowIndexToView(i) != -1) {
+				//if visible
+				sommaVoti += Float.parseFloat( (String) tableModel.getValueAt(i, ColumnHeaders.VOTOFINALE.ordinal()));
+				numeroVoti++;
+			}
+		}
+		
+		return sommaVoti / numeroVoti;
 	}
 	/** 
 	 * Restituisce al chiamante l'id della colonna in base al tipo di filtrazione necessario.
