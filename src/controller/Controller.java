@@ -152,18 +152,23 @@ public class Controller {
 		EsamiTable table = view.getTable();
 		DefaultTableModel tableModel = model.getTableModel();
 		
-		float sommaVoti, numeroVoti;
-		sommaVoti = numeroVoti = 0;
+		float sommaProdotti, cfuTotali;
+		sommaProdotti = cfuTotali = 0;
+		
 		
 		for(int i=0; i < tableModel.getRowCount(); i++) {
 			if (table.getSorter().convertRowIndexToView(i) != -1) {
 				//if visible
-				sommaVoti += Float.parseFloat( (String) tableModel.getValueAt(i, ColumnHeaders.VOTOFINALE.ordinal()));
-				numeroVoti++;
+				float votoFinale, cfu;
+				votoFinale = Float.parseFloat( (String) tableModel.getValueAt(i, ColumnHeaders.VOTOFINALE.ordinal()));
+				cfu = Float.parseFloat( (String) tableModel.getValueAt(i, ColumnHeaders.CFU.ordinal()));
+				
+				sommaProdotti += votoFinale * cfu;
+				cfuTotali += cfu;
 			}
 		}
 		
-		return sommaVoti / numeroVoti;
+		return sommaProdotti / cfuTotali;
 	}
 	/** 
 	 * Restituisce al chiamante l'id della colonna in base al tipo di filtrazione necessario.
