@@ -25,19 +25,16 @@ public class EsamiTable extends JTable{
 		setTableModel(tableModel);
 		
 		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		/** Il mouseListener attende che il mouse clicchi su qualche cella.
+		 * Al doppio click, apre un pop-up che mostra i voti intermedi solo se
+		 * la quantità di prove associata alla riga è più di due.
+		 */
 		addMouseListener(new MouseAdapter() {
 			//Doppio click per selezionare le celle
 			public void mousePressed(MouseEvent mouseEvent) {
-		        Point point = mouseEvent.getPoint();
-		        int row = rowAtPoint(point);
-		        int column = columnAtPoint(point);
-		        
-		        int noProveIntermedieHeaderID = 6; 
-
-		        if (mouseEvent.getClickCount() != 2 || getSelectedRow() == -1 || column != noProveIntermedieHeaderID) {return;}
-				
-		        int noProveIntermedie = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, column)));
-				if(noProveIntermedie > 1) {showProveIntermedie(row, column);}
+		        if (mouseEvent.getClickCount() != 2 || getSelectedRow() == -1) {return;}
+		        int noProveIntermedie = Integer.parseInt(String.valueOf(tableModel.getValueAt(getSelectedRow(), ColumnHeaders.NOPROVE.ordinal())));
+				if(noProveIntermedie > 1) {showProveIntermedie(getSelectedRow());}
 			}
 		});
 		
@@ -52,8 +49,8 @@ public class EsamiTable extends JTable{
 		this.controller = controller;
 	}
 
-	public void showProveIntermedie(int row, int column) {
-		int ID = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 0)));
+	public void showProveIntermedie(int row) {
+		int ID = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, ColumnHeaders.ID.ordinal())));
 		EsameComposto esame = (EsameComposto) controller.getModel().getEsame(ID);
 		JOptionPane.showMessageDialog(null, new PopUpTablePanel(esame.getVotiProveIntermedie(), esame.getPesoProveIntermediePercentage()), "Prove intermedie", JOptionPane.INFORMATION_MESSAGE);
 	}
