@@ -41,13 +41,15 @@ public class Controller {
 	private Model model;
 	private View view;
 	
+	private EsamiTable table;
+	private DefaultTableModel tableModel;
+	
 	//TODO sistemare dove posizionare i TRY/CATCH e valutare se mettere THROWS in Model.java
 	public void aggiungiEsame(Esame esame) throws ExistingEntryException {
 		if(esame instanceof EsameSemplice) {esame = (EsameSemplice) esame;}
 		if(esame instanceof EsameComposto) {esame = (EsameComposto) esame;}
 		
 		Map<Integer, Esame> mappaEsami = model.getMappaEsami();
-		DefaultTableModel tableModel = model.getTableModel();
 		int lastEsameID = model.getLastEsameID();
 		
 		CheckDuplicatesOnAdd(mappaEsami, esame);
@@ -65,7 +67,6 @@ public class Controller {
 		
 		int ID = getView().getTable().getSelectedRow();
 		Map<Integer, Esame> mappaEsami = model.getMappaEsami();
-		DefaultTableModel tableModel = model.getTableModel();
 			
 		checkDuplicatesOnUpdate(mappaEsami, esameModificato);
 		mappaEsami.put(ID, esameModificato);
@@ -80,8 +81,7 @@ public class Controller {
 	}
 	
 	public void rimuoviRiga() {
-		EsamiTable table = view.getTable();
-		DefaultTableModel tableModel = model.getTableModel();
+		 tableModel = model.getTableModel();
 		
 		if(table.getSelectedRow() != -1) {
 			
@@ -97,8 +97,6 @@ public class Controller {
         }
 	}
 	public void modificaRiga() {
-		EsamiTable table = view.getTable();
-		DefaultTableModel tableModel = model.getTableModel();
 		
 		int row = table.getSelectedRow();
 		int column = table.getSelectedColumn();
@@ -138,7 +136,6 @@ public class Controller {
 	 *                   Questo parametro è convertito in un identificatore di colonna tramite il metodo toEnum.
 	 */
 	public void filtraTabella(String query, String filterType) {
-		EsamiTable table = view.getTable();
 		int columnID = toEnum(filterType);
 		
 		if (query.isBlank()) {
@@ -151,14 +148,10 @@ public class Controller {
 	 * Rimuove il filtro applicato alla tabella.
 	 */
 	public void resetFilter() {
-		EsamiTable table = view.getTable();
 		table.getSorter().setRowFilter(null);
 	}
 	
 	public float calcolaVotoMedio() {
-		EsamiTable table = view.getTable();
-		DefaultTableModel tableModel = model.getTableModel();
-
 		float sommaProdotti, cfuTotali;
 		sommaProdotti = cfuTotali = 0;
 		
@@ -178,22 +171,20 @@ public class Controller {
 	}
 	
 	public void mostraStatistiche(int col, String category) {
-		EsamiTable table = view.getTable();
-		DefaultTableModel tableModel = model.getTableModel();
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
 		for(int row=0; row < tableModel.getRowCount(); row++) {
 			if (table.getSorter().convertRowIndexToView(row) != -1) {
 				float votoFinale = Float.parseFloat( (String) tableModel.getValueAt(row, ColumnHeaders.VOTOFINALE.ordinal()));
 				String entryName = (String) tableModel.getValueAt(row, col);
-				dataset.addValue(votoFinale, "Voti", entryName);
+				dataset.addValue(votoFinale, "Voto", entryName);
 			}
 		}
 
 		JFreeChart chart = ChartFactory.createBarChart(
 				"Voti esami", 
 				category, 
-				"Voti", 
+				"Voto", 
 				dataset, 
 				PlotOrientation.VERTICAL,
                 false, true, false);
@@ -252,6 +243,20 @@ public class Controller {
 		for(int key : mappaEsami.keySet()) {
 			if (mappaEsami.get(key).equals(esame)) {throw new ExistingEntryException("lo studente ha già sostenuto l'esame!");}
 		}
+	}
+	
+	public EsamiTable getTable() {
+		return table;
+	}
+	public void setTable(EsamiTable table) {
+		this.table = table;
+	}
+	
+	public DefaultTableModel getTableModel() {
+		return tableModel;
+	}
+	public void setTableModel(DefaultTableModel tableModel) {
+		this.tableModel = tableModel;
 	}
 	
 	public Model getModel() {

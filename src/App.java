@@ -14,12 +14,17 @@ public class App {
 	public static void main(String args[]) {
 		
 		// Linking tra controller, model e view
+		// a controller viene collegato anche table e tableModel
+		// per non dovere ridefinire i due oggetti costantemente all'interno dei metodi.
 		Controller controller = new Controller();
+		
 		Model model = new Model();
 		controller.setModel(model);
+		controller.setTableModel(model.getTableModel());
+		
 		View view = new View(controller);
 		controller.setView(view);
-		
+		controller.setTable(view.getTable());
 		
 		// Mostra l'interfaccia grafica all'utente
 		view.setVisible(true);
