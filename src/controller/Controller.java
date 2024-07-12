@@ -4,6 +4,7 @@
 
 package controller;
 
+import java.awt.Dialog.ModalityType;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -11,6 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+
+import org.jfree.chart.ChartPanel;
 
 import model.Model;
 import model.esami.Esame;
@@ -114,7 +117,7 @@ public class Controller {
 
 			dialog = new JDialog(getView(), "Modifica Esame");
 			dialog.setContentPane(panel);
-			dialog.setModal(true);
+			dialog.setModalityType(ModalityType.APPLICATION_MODAL);
 			dialog.pack();
 			dialog.setVisible(true);
 			
@@ -151,10 +154,11 @@ public class Controller {
 	public float calcolaVotoMedio() {
 		EsamiTable table = view.getTable();
 		DefaultTableModel tableModel = model.getTableModel();
+
+		if(tableModel.getRowCount() == 0) {return 0;}
 		
 		float sommaProdotti, cfuTotali;
 		sommaProdotti = cfuTotali = 0;
-		
 		
 		for(int i=0; i < tableModel.getRowCount(); i++) {
 			if (table.getSorter().convertRowIndexToView(i) != -1) {
@@ -170,6 +174,10 @@ public class Controller {
 		
 		return sommaProdotti / cfuTotali;
 	}
+	
+	public void mostraStatistiche() {
+	}
+	
 	/** 
 	 * Restituisce al chiamante l'id della colonna in base al tipo di filtrazione necessario.
 	 * 
