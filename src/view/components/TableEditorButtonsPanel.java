@@ -23,6 +23,10 @@ import model.esami.EsameComposto;
 import model.esami.EsameSemplice;
 
 public class TableEditorButtonsPanel extends JPanel implements ActionListener {
+	private Controller controller;
+	private JTable table;
+	private DefaultTableModel tableModel;
+	
 	private JButton rimuoviRigaButton;
 	private JButton modificaRigaButton;
 	
@@ -33,10 +37,8 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private JButton resetFilterBtn;
 		
 	private JLabel votoMedioLabel;
+	private JButton mostraStatisticheBtn;
 	
-	private Controller controller;
-	private JTable table;
-	private DefaultTableModel tableModel;
 	
 	public TableEditorButtonsPanel(Controller controller, JTable table) {
 		setController(controller);
@@ -56,15 +58,18 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		resetFilterBtn = new JButton("X");
 		
 		votoMedioLabel = new JLabel("Voto Medio: ");
+		mostraStatisticheBtn = new JButton("Stats");
 		
 		rimuoviRigaButton.addActionListener(this);
 		modificaRigaButton.addActionListener(this);
 		filtraBtn.addActionListener(this);
 		resetFilterBtn.addActionListener(this);
+		mostraStatisticheBtn.addActionListener(this);
 		
 		filterTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		resetFilterBtn.setEnabled(false);
 		votoMedioLabel.setVisible(false);
+		mostraStatisticheBtn.setVisible(false);
 		
 		add(rimuoviRigaButton);
 		add(modificaRigaButton);
@@ -74,6 +79,7 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		add(filtraBtn);
 		add(resetFilterBtn);
 		add(votoMedioLabel);
+		add(mostraStatisticheBtn);
 	}
 	
 	/**
@@ -100,18 +106,30 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 			
 			controller.filtraTabella(query, filterName);
 			
+			// se la query viene eseguita, allora: rimuovi il testo dalla barra di ricerca,
+			// mostra il tasto di reset, mostra il voto medio e il pulsante per le statistiche
 			if(!query.isBlank()) {
 				filterTextArea.setText("");
 				resetFilterBtn.setEnabled(true);
 				
 				votoMedioLabel.setText("Voto Medio: " + String.format("%.2f", (controller.calcolaVotoMedio())));
 				votoMedioLabel.setVisible(true);
+				mostraStatisticheBtn.setVisible(true);
 			}
 		} 
 		else if (buttonName == "X") {
 			controller.resetFilter();
 			resetFilterBtn.setEnabled(false);
 			votoMedioLabel.setVisible(false);
+			mostraStatisticheBtn.setVisible(false);
+		}
+		
+		else if (buttonName == "Stats") {
+			if((String) filterType.getSelectedItem() == "Matricola") {
+				controller.mostraStatistiche(ColumnHeaders.MATERIA.ordinal(), "Materia");
+			} else if((String) filterType.getSelectedItem() == "Materia") {
+				controller.mostraStatistiche(ColumnHeaders.MATRICOLA.ordinal(), "Matricola");
+			}
 		}
 	}
 
