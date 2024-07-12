@@ -13,7 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import model.Model;
 import model.esami.Esame;
@@ -24,7 +28,6 @@ import view.components.ColumnHeaders;
 import view.components.EsameCompostoPanel;
 import view.components.EsameSemplicePopUpPanel;
 import view.components.EsamiTable;
-import view.components.TableEditorButtonsPanel;
 import view.errors.ExistingEntryException;
 
 
@@ -55,6 +58,7 @@ public class Controller {
 
 		mappaEsami.put(esame.getID(), esame);
 	}
+	//TODO it is polymorphism, but is this the right way to apply it?
 	public void modificaEsame(Esame esameModificato) throws ExistingEntryException {
 		if(esameModificato instanceof EsameSemplice) {esameModificato = (EsameSemplice) esameModificato;}
 		if(esameModificato instanceof EsameComposto) {esameModificato = (EsameComposto) esameModificato;}
@@ -155,8 +159,6 @@ public class Controller {
 		EsamiTable table = view.getTable();
 		DefaultTableModel tableModel = model.getTableModel();
 
-		if(tableModel.getRowCount() == 0) {return 0;}
-		
 		float sommaProdotti, cfuTotali;
 		sommaProdotti = cfuTotali = 0;
 		
@@ -175,7 +177,34 @@ public class Controller {
 		return sommaProdotti / cfuTotali;
 	}
 	
-	public void mostraStatistiche() {
+	public void mostraStatistiche(int col, String category) {
+		EsamiTable table = view.getTable();
+		DefaultTableModel tableModel = model.getTableModel();
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		
+		for(int row=0; row < tableModel.getRowCount(); row++) {
+			if (table.getSorter().convertRowIndexToView(row) != -1) {
+				float votoFinale = Float.parseFloat( (String) tableModel.getValueAt(row, ColumnHeaders.VOTOFINALE.ordinal()));
+				String entryName = (String) tableModel.getValueAt(row, col);
+				dataset.addValue(votoFinale, "Voti", entryName);
+			}
+		}
+
+		JFreeChart chart = ChartFactory.createBarChart(
+				"Voti esami", 
+				category, 
+				"Voti", 
+				dataset, 
+				PlotOrientation.VERTICAL,
+                false, true, false);
+		
+		ChartPanel chartPanel = new ChartPanel(chart);
+		
+		JDialog dialog = new JDialog(getView(), "Modifica Esame");
+		dialog.setContentPane(chartPanel);
+		dialog.setModalityType(ModalityType.APPLICATION_MODAL);
+		dialog.pack();
+		dialog.setVisible(true);
 	}
 	
 	/** 
