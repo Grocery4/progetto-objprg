@@ -199,16 +199,19 @@ public class Controller {
 		dialog.setVisible(true);
 	}
 	
+	/** stampaTabella() utilizza il metodo JTable.print() per stampare la tabella, e
+	 * attraverso un try/catch mostra il risultato dell'operazione sottoforma di finestra di dialogo.
+	 */
 	public void stampaTabella() {
 		try {
             boolean status = table.print(JTable.PrintMode.FIT_WIDTH, null, null);
             if (status) {
-                JOptionPane.showMessageDialog(null, "Printing Complete", "Printing Result", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Stampa completata", "Risultato stampa", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Printing Cancelled", "Printing Result", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Stampa annullata", "Risultato stampa", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception pe) {
-            JOptionPane.showMessageDialog(null, "Printing Failed: " + pe.getMessage(), "Printing Result", JOptionPane.ERROR_MESSAGE);
+            System.err.println(pe.getMessage());
         }
 	}
 	
