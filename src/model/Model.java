@@ -8,12 +8,10 @@ package model;
 
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
 import model.esami.*;
-import view.errors.ExistingEntryException;
 
 public class Model {
 	private Map<Integer, Esame> mappaEsami;
