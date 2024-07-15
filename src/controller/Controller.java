@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -196,6 +197,19 @@ public class Controller {
 		dialog.setModalityType(ModalityType.APPLICATION_MODAL);
 		dialog.pack();
 		dialog.setVisible(true);
+	}
+	
+	public void stampaTabella() {
+		try {
+            boolean status = table.print(JTable.PrintMode.FIT_WIDTH, null, null);
+            if (status) {
+                JOptionPane.showMessageDialog(null, "Printing Complete", "Printing Result", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Printing Cancelled", "Printing Result", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception pe) {
+            JOptionPane.showMessageDialog(null, "Printing Failed: " + pe.getMessage(), "Printing Result", JOptionPane.ERROR_MESSAGE);
+        }
 	}
 	
 	/** 

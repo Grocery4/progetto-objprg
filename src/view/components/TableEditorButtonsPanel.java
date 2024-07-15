@@ -4,13 +4,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -18,17 +14,16 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
-import model.esami.Esame;
-import model.esami.EsameComposto;
-import model.esami.EsameSemplice;
 
 public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private Controller controller;
 	private JTable table;
 	private DefaultTableModel tableModel;
 	
-	private JButton rimuoviRigaButton;
-	private JButton modificaRigaButton;
+	private JButton printBtn;
+	
+	private JButton rimuoviRigaBtn;
+	private JButton modificaRigaBtn;
 	
 	private JLabel filterLabel;
 	private JTextArea filterTextArea;
@@ -49,8 +44,9 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	}
 	
 	private void initializePanel() {
-		rimuoviRigaButton = new JButton("Rimuovi");
-		modificaRigaButton = new JButton("Modifica");
+		printBtn = new JButton("Stampa");
+		rimuoviRigaBtn = new JButton("Rimuovi");
+		modificaRigaBtn = new JButton("Modifica");
 		filterLabel = new JLabel("Filtra per: ");
 		filterTextArea = new JTextArea(1, 15);
 		filterType = new JComboBox<>(new String[] {"Matricola", "Materia"});
@@ -60,8 +56,9 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		votoMedioLabel = new JLabel("Voto Medio: ");
 		mostraStatisticheBtn = new JButton("Stats");
 		
-		rimuoviRigaButton.addActionListener(this);
-		modificaRigaButton.addActionListener(this);
+		printBtn.addActionListener(this);
+		rimuoviRigaBtn.addActionListener(this);
+		modificaRigaBtn.addActionListener(this);
 		filtraBtn.addActionListener(this);
 		resetFilterBtn.addActionListener(this);
 		mostraStatisticheBtn.addActionListener(this);
@@ -71,8 +68,9 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		votoMedioLabel.setVisible(false);
 		mostraStatisticheBtn.setVisible(false);
 		
-		add(rimuoviRigaButton);
-		add(modificaRigaButton);
+		add(printBtn);
+		add(rimuoviRigaBtn);
+		add(modificaRigaBtn);
 		add(filterLabel);
 		add(filterTextArea);
 		add(filterType);
@@ -94,7 +92,11 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = ((JButton) e.getSource()).getText();
-		if(buttonName == "Rimuovi") {
+		
+		if(buttonName == "Stampa") {
+			controller.stampaTabella();
+		}
+		else if(buttonName == "Rimuovi") {
 			controller.rimuoviRiga();
 		} 
 		else if (buttonName == "Modifica") {
