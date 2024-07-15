@@ -20,7 +20,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import model.Model;
+import model.ModelINUSE;
 import model.esami.Esame;
 import model.esami.EsameComposto;
 import model.esami.EsameSemplice;
@@ -39,7 +39,7 @@ import view.errors.ExistingEntryException;
 //TODO vedere se in ogni metodo Map<I,E> mappaEsami può essere sostituito da un eventuale attributo di classe, piuttosto che ridichiararlo ogni volta
 //TODO vedere se si può evitare di dichiarare in ogni metodo la variabile table
 public class Controller {
-	private Model model;
+	private ModelINUSE model;
 	private View view;
 	
 	private EsamiTable table;
@@ -276,10 +276,10 @@ public class Controller {
 		this.tableModel = tableModel;
 	}
 	
-	public Model getModel() {
+	public ModelINUSE getModel() {
 		return model;
 	}
-	public void setModel(Model model) {
+	public void setModel(ModelINUSE model) {
 		this.model = model;
 	}
 

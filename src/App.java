@@ -7,7 +7,7 @@
  */
 
 import controller.Controller;
-import model.Model;
+import model.ModelINUSE;
 import view.View;
 
 public class App {
@@ -18,7 +18,7 @@ public class App {
 		// per non dovere ridefinire i due oggetti costantemente all'interno dei metodi.
 		Controller controller = new Controller();
 		
-		Model model = new Model();
+		ModelINUSE model = new ModelINUSE();
 		controller.setModel(model);
 		controller.setTableModel(model.getTableModel());
 		

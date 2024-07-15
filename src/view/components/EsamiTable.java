@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import controller.Controller;
-import model.Model;
+import model.ModelINUSE;
 import model.esami.EsameComposto;
 
 public class EsamiTable extends JTable{

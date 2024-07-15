@@ -13,12 +13,12 @@ import javax.swing.table.DefaultTableModel;
 
 import model.esami.*;
 
-public class Model {
+public class ModelINUSE {
 	private Map<Integer, Esame> mappaEsami;
 	private int lastEsameID;
 	private DefaultTableModel tableModel;
 	
-	public Model() {
+	public ModelINUSE() {
 		initializeModel();
 	}
 	
