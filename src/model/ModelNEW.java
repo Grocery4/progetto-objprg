@@ -55,8 +55,8 @@ public class ModelNEW {
 		esamiList.remove(ID);
 	}
 	
-	public void editInList() {
-		
+	public void editInList(int ID, Esame e) {
+		esamiList.add(ID, e);
 	}
 	
 	public Esame getEsame(int ID) {
