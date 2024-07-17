@@ -1,4 +1,4 @@
-/** @file Model.java
+/** @file Database.java
 * La classe rappresenta la parte back-end dell'applicazione, qui si memorizzano e manipolano i dati immessi o richiesti dall'utente. 
 * La struttura dati usata per memorizzare gli esami immessi nel programma è una ArrayList di lunghezza variabile, che utilizza numeri interi positivi come indice
 * per identificarli.
@@ -11,7 +11,6 @@ import java.util.List;
 
 import model.esami.Esame;
 
-//TODO add documentation
 public class Database {
 	private List<Esame> esamiList;
 	private int lastId;
