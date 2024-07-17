@@ -7,22 +7,22 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import controller.Controller;
+import controller.ControllerNEW;
+import model.EsamiTableModel;
 import model.ModelINUSE;
 import model.esami.EsameComposto;
 
 public class EsamiTable extends JTable{
-	private Controller controller;
-	private DefaultTableModel tableModel;
-	private TableRowSorter<DefaultTableModel> sorter;
+	private ControllerNEW controller;
+	private EsamiTableModel tableModel;
+	private TableRowSorter<EsamiTableModel> sorter;
 	
-	public EsamiTable(Controller controller, DefaultTableModel tableModel) {
+	public EsamiTable(ControllerNEW controller, EsamiTableModel tableModel) {
 		super(tableModel);
-		setController(controller);
 		setTableModel(tableModel);
+		setController(controller);
 		
 		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		/** Il mouseListener attende che il mouse clicchi su qualche cella.
@@ -42,30 +42,30 @@ public class EsamiTable extends JTable{
 		setRowSorter(sorter);
 	}
 	
-	public Controller getController() {
+	public ControllerNEW getController() {
 		return controller;
 	}
-	public void setController(Controller controller) {
+	public void setController(ControllerNEW controller) {
 		this.controller = controller;
 	}
 
 	public void showProveIntermedie(int row) {
 		int ID = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, ColumnHeaders.ID.ordinal())));
-		EsameComposto esame = (EsameComposto) controller.getModel().getEsame(ID);
+		EsameComposto esame = (EsameComposto) controller.getEsame(ID);
 		JOptionPane.showMessageDialog(null, new PopUpTablePanel(esame.getVotiProveIntermedie(), esame.getPesoProveIntermediePercentage()), "Prove intermedie", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	public DefaultTableModel getTableModel() {
+	public EsamiTableModel getTableModel() {
 		return tableModel;
 	}
-	public void setTableModel(DefaultTableModel tableModel) {
+	public void setTableModel(EsamiTableModel tableModel) {
 		this.tableModel = tableModel;
 	}
 
-	public TableRowSorter<DefaultTableModel> getSorter() {
+	public TableRowSorter<EsamiTableModel> getSorter() {
 		return sorter;
 	}
-	public void setSorter(TableRowSorter<DefaultTableModel> sorter) {
+	public void setSorter(TableRowSorter<EsamiTableModel> sorter) {
 		this.sorter = sorter;
 	}
 }

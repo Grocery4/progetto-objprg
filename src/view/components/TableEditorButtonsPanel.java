@@ -14,11 +14,15 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
+import controller.ControllerNEW;
+import model.EsamiTableModel;
+import view.View;
 
 public class TableEditorButtonsPanel extends JPanel implements ActionListener {
-	private Controller controller;
-	private JTable table;
-	private DefaultTableModel tableModel;
+	private View view;
+	private ControllerNEW controller;
+	private EsamiTable table;
+	private EsamiTableModel tableModel;
 	
 	private JButton printBtn;
 	
@@ -35,10 +39,11 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private JButton mostraStatisticheBtn;
 	
 	
-	public TableEditorButtonsPanel(Controller controller, JTable table) {
+	public TableEditorButtonsPanel(View view, ControllerNEW controller, EsamiTable table) {
+		setView(view);
 		setController(controller);
 		setTable(table);
-		setTableModel((DefaultTableModel) table.getModel());
+		setTableModel((EsamiTableModel) table.getModel());
 		
 		initializePanel();
 	}
@@ -97,11 +102,12 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 			controller.stampaTabella();
 		}
 		else if(buttonName == "Rimuovi") {
-			controller.rimuoviRiga();
+			int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), 0);
+			controller.removeEsame(ID);
 		} 
-		else if (buttonName == "Modifica") {
-			controller.modificaRiga();
-		} 
+		//else if (buttonName == "Modifica") {
+			//controller.modificaRiga();
+		//} 
 		else if (buttonName == "Cerca") {
 			String query = filterTextArea.getText();
 			String filterName = (String) filterType.getSelectedItem();
@@ -116,7 +122,7 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 				
 				votoMedioLabel.setText("Voto Medio: " + String.format("%.2f", (controller.calcolaVotoMedio())));
 				votoMedioLabel.setVisible(true);
-				mostraStatisticheBtn.setVisible(true);
+				mostraStatisticheBtn.setVisible(true); 
 			}
 		} 
 		else if (buttonName == "X") {
@@ -135,24 +141,31 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	public JTable getTable() {
+	public EsamiTable getTable() {
 		return table;
 	}
-	public void setTable(JTable table) {
+	public void setTable(EsamiTable table) {
 		this.table = table;
 	}
 
-	public Controller getController() {
+	public View getView() {
+		return view;
+	}
+	public void setView(View view) {
+		this.view = view;
+	}
+
+	public ControllerNEW getController() {
 		return controller;
 	}
-	public void setController(Controller controller) {
+	public void setController(ControllerNEW controller) {
 		this.controller = controller;
 	}
 
-	public DefaultTableModel getTableModel() {
+	public EsamiTableModel getTableModel() {
 		return tableModel;
 	}
-	public void setTableModel(DefaultTableModel tableModel) {
+	public void setTableModel(EsamiTableModel tableModel) {
 		this.tableModel = tableModel;
 	}
 }

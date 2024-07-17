@@ -9,29 +9,24 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 
-import controller.Controller;
+import controller.ControllerNEW;
 import view.components.*;
-import view.errors.ExistingEntryException;
-import model.esami.*;
+import model.EsamiTableModel;
 
 //TODO debate whether to use getters or use attributes directly
 //TODO aggiungere sysout quando si fa qualcosa in GUI
 public class View extends JFrame {
-	private Controller controller;
+	private ControllerNEW controller;
 	private BorderLayout frameLayout;
 	private SidePanel sidePanel;
 	private TableEditorButtonsPanel editorPanel;
-	private DefaultTableModel tableModel;
 	
 	private JScrollPane tableScrollPane;
+	private EsamiTableModel tableModel;
 	private EsamiTable table;
 	
     /**
@@ -39,7 +34,7 @@ public class View extends JFrame {
      *
      * @param controller L'oggetto che gestisce la logica dell'applicazione.
     */
-	public View(Controller controller) {
+	public View(ControllerNEW controller) {
 		setController(controller);
 		initializeFrameSettings();
 		initializeFramePanels();
@@ -63,21 +58,29 @@ public class View extends JFrame {
 		sidePanel = new SidePanel(this);
 		add(sidePanel, BorderLayout.WEST);
 		
-		tableModel = getController().getModel().getTableModel();
+		tableModel = new EsamiTableModel(controller.getEsamiList());
 		table = new EsamiTable(controller, tableModel);
 		
 		tableScrollPane = new JScrollPane(table);
 		add(tableScrollPane, BorderLayout.CENTER);
 		
-		editorPanel = new TableEditorButtonsPanel(controller, table);
+		editorPanel = new TableEditorButtonsPanel(this, controller, table);
 		add(editorPanel, BorderLayout.SOUTH);
+		
 	}
 	
-	public Controller getController() {
+	public ControllerNEW getController() {
 		return controller;
 	}
-	public void setController(Controller controller) {
+	public void setController(ControllerNEW controller) {
 		this.controller = controller;
+	}
+
+	public EsamiTableModel getTableModel() {
+		return tableModel;
+	}
+	public void setTableModel(EsamiTableModel tableModel) {
+		this.tableModel = tableModel;
 	}
 
 	public EsamiTable getTable() {
