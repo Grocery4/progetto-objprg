@@ -32,10 +32,10 @@ public class Database {
 	 * @return true se l'esame viene aggiunto correttamente alla lista, false se l'esame inserito è già presente.
 	 */
 	public boolean addToList(Esame esame) {
-		if(findEsameInList(esame) == -1) {return false;}
+		if(findEsameInList(esame) != -1) {return false;}
 		
 		esame.setID(getLastId());
-		esamiList.add(lastId, esame);
+		esamiList.add(esame);
 		incrementLastID();
 		return true;
 	}
