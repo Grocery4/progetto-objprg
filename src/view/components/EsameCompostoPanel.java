@@ -269,7 +269,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 				updateArrayIntermedio();
 				break;
 			case "Invia":
-				sendFormToView();
+				sendForm();
 				break;
 		}
 	}
@@ -303,14 +303,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		
 		if(!isFormLockedStatus()) {			
 			try {
-				if(nomeTextArea.getText().isBlank() || 
-						cognomeTextArea.getText().isBlank() || 
-						materiaTextArea.getText().isBlank() || 
-						cfuTextArea.getText().isBlank() || 
-						numProveIntermedieTextArea.getText().isBlank()
-						) 
-				{throw new NullInputsException("valori nulli inseriti");}
-				
+				checkNullInputs();
 				
 				nome = nomeTextArea.getText();
 				cognome = cognomeTextArea.getText();
@@ -322,7 +315,6 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 				if(numProveIntermedie < 1) {throw new InvalidRangeException("valore fuori dall'intervallo");}
 				
 				initializeArrays();
-				
 				setFormLockedStatus(true);
 				lockForm(isFormLockedStatus());
 			} catch (Exception e) {
@@ -330,26 +322,26 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 			} 
 		}
 	}
+
+	private void checkNullInputs() throws NullInputsException {
+		if(nomeTextArea.getText().isBlank() || 
+				cognomeTextArea.getText().isBlank() || 
+				materiaTextArea.getText().isBlank() || 
+				cfuTextArea.getText().isBlank() || 
+				numProveIntermedieTextArea.getText().isBlank()
+				) 
+		{throw new NullInputsException("valori nulli inseriti");}
+	}
 	
 	public void updateArrayIntermedio() {
 		if(!isFormLockedStatus()) {
 			System.err.println("form non ancora compilato");
 		} else {			
 			try {
-				if(votoIntermedioTextArea.getText().isBlank() || pesoIntermedioTextArea.getText().isBlank()) {throw new NullInputsException("null values");}
-				if(Float.parseFloat(votoIntermedioTextArea.getText()) < 18 || Float.parseFloat(votoIntermedioTextArea.getText()) > 30) {throw new InvalidRangeException("voto fuori dall'intervallo");}
-				if(Float.parseFloat(pesoIntermedioTextArea.getText()) < 0 || Float.parseFloat(pesoIntermedioTextArea.getText()) > 100) {throw new InvalidRangeException("peso fuori dall'intervallo");}
+				checkForExceptions();
 				
 				if(arrayIndex < numProveIntermedie) {
-					float votoIntermedio = Float.parseFloat(votoIntermedioTextArea.getText());
-					float pesoIntermedioPercentage = Float.parseFloat(pesoIntermedioTextArea.getText());
-				
-					votoIntermedioArray.add(votoIntermedio);
-					pesoIntermedioArray.add(pesoIntermedioPercentage);
-					arrayIndex++;
-					
-					votoIntermedioTextArea.setText("");
-					pesoIntermedioTextArea.setText("");
+					addProvaIntermedia();
 				} else {
 					System.err.println("numero prove attuale maggiore del numero di prove previste");
 				}
@@ -384,9 +376,27 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 			}
 		}
 	}
+
+	private void checkForExceptions() throws NullInputsException, InvalidRangeException {
+		if(votoIntermedioTextArea.getText().isBlank() || pesoIntermedioTextArea.getText().isBlank()) {throw new NullInputsException("null values");}
+		if(Float.parseFloat(votoIntermedioTextArea.getText()) < 18 || Float.parseFloat(votoIntermedioTextArea.getText()) > 30) {throw new InvalidRangeException("voto fuori dall'intervallo");}
+		if(Float.parseFloat(pesoIntermedioTextArea.getText()) < 0 || Float.parseFloat(pesoIntermedioTextArea.getText()) > 100) {throw new InvalidRangeException("peso fuori dall'intervallo");}
+	}
+
+	private void addProvaIntermedia() {
+		float votoIntermedio = Float.parseFloat(votoIntermedioTextArea.getText());
+		float pesoIntermedioPercentage = Float.parseFloat(pesoIntermedioTextArea.getText());
+
+		votoIntermedioArray.add(votoIntermedio);
+		pesoIntermedioArray.add(pesoIntermedioPercentage);
+		arrayIndex++;
+		
+		votoIntermedioTextArea.setText("");
+		pesoIntermedioTextArea.setText("");
+	}
 	
 	@Override
-	public void sendFormToView() {
+	public void sendForm() {
 		lode = lodeCheckBox.isSelected();
 		EsameComposto esame = new EsameComposto(matricola, nome, cognome, materia, cfu, numProveIntermedie, pesoArray, votoArray, lode);
 		

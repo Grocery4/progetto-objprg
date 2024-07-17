@@ -12,5 +12,5 @@ import java.awt.event.ActionListener;
 public interface FormActionsInterface extends ActionListener {
 	public void actionPerformed(ActionEvent e);
 	public void resetFormContent();
-	public void sendFormToView();
+	public void sendForm();
 }
