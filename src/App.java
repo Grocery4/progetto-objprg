@@ -6,27 +6,27 @@
  * alla logica del programma, permettendone la comunicazione.
  */
 
-import controller.Controller;
-import model.ModelINUSE;
+import controller.ControllerNEW;
 import view.View;
+import model.esami.*;
 
 public class App {
 	public static void main(String args[]) {
 		
-		// Linking tra controller, model e view
-		// a controller viene collegato anche table e tableModel
-		// per non dovere ridefinire i due oggetti costantemente all'interno dei metodi.
-		Controller controller = new Controller();
-		
-		ModelINUSE model = new ModelINUSE();
-		controller.setModel(model);
-		controller.setTableModel(model.getTableModel());
-		
+		// Linking tra controller e view.
+		// In view sono definiti table e tableModel, mentre in controller è definito database. 
+		ControllerNEW controller = new ControllerNEW();
 		View view = new View(controller);
 		controller.setView(view);
-		controller.setTable(view.getTable());
 		
 		// Mostra l'interfaccia grafica all'utente
 		view.setVisible(true);
+		
+		//TODO REMOVE AFTER TESTING
+		Esame e = new EsameSemplice(2, "a", "b", "c", 2, 24f, false);
+		Esame e2 = new EsameSemplice(3, "ddd", "kkk", "ffff", 3, 30f, true);
+		controller.addEsame(e);
+		controller.addEsame(e2);
+		
 	}
 }
