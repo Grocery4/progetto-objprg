@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -10,9 +11,9 @@ import model.esami.EsameSemplice;
 
 public class EsamiTableModel extends AbstractTableModel {
 	public final static String[] columnHeadings = new String[] {"ID", "Matricola", "Nome", "Cognome", "Materia", "CFU", "No. Prove", "Voto Finale", "Lode"};
-	private ArrayList<Esame> esamiList;
+	private List<Esame> esamiList;
 	
-	public EsamiTableModel(ArrayList<Esame> esamiList) {
+	public EsamiTableModel(List<Esame> esamiList) {
 		setEsamiList(esamiList);
 	}
 	
@@ -59,10 +60,10 @@ public class EsamiTableModel extends AbstractTableModel {
 		return columnHeadings[column];
 	}
 
-	public ArrayList<Esame> getEsamiList() {
+	public List<Esame> getEsamiList() {
 		return esamiList;
 	}
-	public void setEsamiList(ArrayList<Esame> esamiList) {
+	public void setEsamiList(List<Esame> esamiList) {
 		this.esamiList = esamiList;
 	}
 }
