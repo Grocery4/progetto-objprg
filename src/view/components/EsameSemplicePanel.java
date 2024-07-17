@@ -183,11 +183,7 @@ public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
 		boolean lode = false;
 		
 		try {
-			Component[] components = this.getComponents();
-			for (Component component : components) {
-				if (!(component.getClass().equals(JTextArea.class))) {continue;}
-				if(((JTextArea) component).getText().isBlank()) {throw new NullInputsException("valori nulli inseriti");}
-			}
+			checkNullInputs();
 			
 			nome = nomeTextArea.getText();
 			cognome = cognomeTextArea.getText();
@@ -197,8 +193,7 @@ public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
 			voto = Float.parseFloat(votoTextArea.getText());
 			lode = lodeCheckbox.isSelected();
 			
-			if(voto < 18 || voto > 30) {throw new InvalidRangeException("voto fuori dall'intervallo");}
-			if(lode == true && voto != 30) {throw new InvalidLodeException("lode non applicabile");}
+			checkOutOfBoundsValues(voto, lode);
 	
 			Esame esame = new EsameSemplice(matricola, nome, cognome, materia, cfu, voto, lode);
 			view.getController().aggiungiEsame(esame);
@@ -207,6 +202,19 @@ public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
 		} catch (Exception e) {
 			System.err.println(e);
 		} 
+	}
+
+	private void checkOutOfBoundsValues(float voto, boolean lode) throws InvalidRangeException, InvalidLodeException {
+		if(voto < 18 || voto > 30) {throw new InvalidRangeException("voto fuori dall'intervallo");}
+		if(lode == true && voto != 30) {throw new InvalidLodeException("lode non applicabile");}
+	}
+
+	private void checkNullInputs() throws NullInputsException {
+		Component[] components = this.getComponents();
+		for (Component component : components) {
+			if (!(component.getClass().equals(JTextArea.class))) {continue;}
+			if(((JTextArea) component).getText().isBlank()) {throw new NullInputsException("valori nulli inseriti");}
+		}
 	}
 
 	public View getView() {
