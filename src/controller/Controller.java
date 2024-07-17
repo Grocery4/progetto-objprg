@@ -20,11 +20,11 @@ import view.View;
 import view.components.ColumnHeaders;
 import view.errors.ExistingEntryException;
 
-public class ControllerNEW {
+public class Controller {
 	private Database database;
 	private View view;
 	
-	public ControllerNEW() {
+	public Controller() {
 		database = new Database();
 	}
 	

@@ -9,17 +9,16 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableRowSorter;
 
-import controller.ControllerNEW;
+import controller.Controller;
 import model.EsamiTableModel;
-import model.ModelINUSE;
 import model.esami.EsameComposto;
 
 public class EsamiTable extends JTable{
-	private ControllerNEW controller;
+	private Controller controller;
 	private EsamiTableModel tableModel;
 	private TableRowSorter<EsamiTableModel> sorter;
 	
-	public EsamiTable(ControllerNEW controller, EsamiTableModel tableModel) {
+	public EsamiTable(Controller controller, EsamiTableModel tableModel) {
 		super(tableModel);
 		setTableModel(tableModel);
 		setController(controller);
@@ -42,10 +41,10 @@ public class EsamiTable extends JTable{
 		setRowSorter(sorter);
 	}
 	
-	public ControllerNEW getController() {
+	public Controller getController() {
 		return controller;
 	}
-	public void setController(ControllerNEW controller) {
+	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 

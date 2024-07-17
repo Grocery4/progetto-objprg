@@ -8,19 +8,16 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
-import controller.ControllerNEW;
 import model.EsamiTableModel;
 import view.View;
 
 public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private View view;
-	private ControllerNEW controller;
+	private Controller controller;
 	private EsamiTable table;
 	private EsamiTableModel tableModel;
 	
@@ -39,7 +36,7 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private JButton mostraStatisticheBtn;
 	
 	
-	public TableEditorButtonsPanel(View view, ControllerNEW controller, EsamiTable table) {
+	public TableEditorButtonsPanel(View view, Controller controller, EsamiTable table) {
 		setView(view);
 		setController(controller);
 		setTable(table);
@@ -155,10 +152,10 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		this.view = view;
 	}
 
-	public ControllerNEW getController() {
+	public Controller getController() {
 		return controller;
 	}
-	public void setController(ControllerNEW controller) {
+	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 

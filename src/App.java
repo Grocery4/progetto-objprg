@@ -6,7 +6,7 @@
  * alla logica del programma, permettendone la comunicazione.
  */
 
-import controller.ControllerNEW;
+import controller.Controller;
 import view.View;
 import model.esami.*;
 
@@ -15,7 +15,7 @@ public class App {
 		
 		// Linking tra controller e view.
 		// In view sono definiti table e tableModel, mentre in controller è definito database. 
-		ControllerNEW controller = new ControllerNEW();
+		Controller controller = new Controller();
 		View view = new View(controller);
 		controller.setView(view);
 		

@@ -13,14 +13,14 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import controller.ControllerNEW;
+import controller.Controller;
 import view.components.*;
 import model.EsamiTableModel;
 
 //TODO debate whether to use getters or use attributes directly
 //TODO aggiungere sysout quando si fa qualcosa in GUI
 public class View extends JFrame {
-	private ControllerNEW controller;
+	private Controller controller;
 	private BorderLayout frameLayout;
 	private SidePanel sidePanel;
 	private TableEditorButtonsPanel editorPanel;
@@ -34,7 +34,7 @@ public class View extends JFrame {
      *
      * @param controller L'oggetto che gestisce la logica dell'applicazione.
     */
-	public View(ControllerNEW controller) {
+	public View(Controller controller) {
 		setController(controller);
 		initializeFrameSettings();
 		initializeFramePanels();
@@ -69,10 +69,10 @@ public class View extends JFrame {
 		
 	}
 	
-	public ControllerNEW getController() {
+	public Controller getController() {
 		return controller;
 	}
-	public void setController(ControllerNEW controller) {
+	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 
