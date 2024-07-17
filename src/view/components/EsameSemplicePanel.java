@@ -196,7 +196,7 @@ public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
 			checkOutOfBoundsValues(voto, lode);
 	
 			Esame esame = new EsameSemplice(matricola, nome, cognome, materia, cfu, voto, lode);
-			view.getController().aggiungiEsame(esame);
+			view.getController().addEsame(esame);
 			resetFormContent();
 			
 		} catch (Exception e) {

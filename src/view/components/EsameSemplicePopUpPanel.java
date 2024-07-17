@@ -165,6 +165,7 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 	}
 	
 	public void sendFormToView() {
+		int id = 0;
 		String nome = null;
 		String cognome = null;
 		int matricola = 0;
@@ -187,7 +188,7 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 			checkVotoValidity(voto, lode);
 	
 			Esame esame = new EsameSemplice(matricola, nome, cognome, materia, cfu, voto, lode);
-			view.getController().modificaEsame(esame);
+			view.getController().editEsame(esame);
 			
 			//chiudi finestra alla fine
 			JDialog frame = ((JDialog) SwingUtilities.getWindowAncestor(this));

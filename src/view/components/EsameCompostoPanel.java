@@ -401,7 +401,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		EsameComposto esame = new EsameComposto(matricola, nome, cognome, materia, cfu, numProveIntermedie, pesoArray, votoArray, lode);
 		
 		try {
-			view.getController().aggiungiEsame(esame);
+			view.getController().addEsame(esame);
 			resetFormContent();
 		} catch (Exception e) {
 			System.err.println(e);
