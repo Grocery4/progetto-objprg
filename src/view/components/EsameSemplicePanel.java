@@ -157,7 +157,7 @@ public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
 		if(buttonName == "Annulla") {
 			resetFormContent();
 		} else if (buttonName == "Conferma") {
-			sendFormToView();
+			sendForm();
 		}
 	}
 	
@@ -173,7 +173,7 @@ public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
 	}
 	
 	@Override
-	public void sendFormToView() {
+	public void sendForm() {
 		String nome = null;
 		String cognome = null;
 		int matricola = 0;
