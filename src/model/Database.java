@@ -52,7 +52,12 @@ public class Database {
 	 * @param ID id dell'esame da eliminare.
 	 */
 	public void removeFromList(int ID) {
-		esamiList.remove(ID);
+		for(Esame e : esamiList) {
+			if(e.getID() == ID) {
+				esamiList.remove(e); 
+				return;
+			}
+		}
 	}
 	
 	/**
