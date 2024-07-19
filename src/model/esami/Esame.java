@@ -11,6 +11,8 @@ import java.io.Serializable;
  * in caso di valori nulli, così da non dover passare valori "vuoti" all'oggetto.
  */
 public abstract class Esame implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private int ID;
 	private int matricola;
 	private String nome;
