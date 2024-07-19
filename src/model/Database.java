@@ -48,6 +48,9 @@ public class Database {
 	
 	/**
 	 * Metodo per l'eliminazione dell'esame dalla lista.
+	 * Controlla ogni esame all'interno della lista e compara l'ID con quello preso in input.
+	 * Non elimina utilizzando direttamento l'ID preso in input in quanto non corrisponde con l'ID dell'esame
+	 * ma con l'ID dell'elemento all'interno dell'ArrayList.
 	 * 
 	 * @param ID id dell'esame da eliminare.
 	 */
