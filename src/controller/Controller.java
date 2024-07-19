@@ -24,10 +24,6 @@ public class Controller {
 	private Database database;
 	private View view;
 	
-	public Controller() {
-		database = new Database();
-	}
-	
 	public void addEsame(Esame e) {
 		database.addToList(e);
 		view.getTableModel().fireTableDataChanged();

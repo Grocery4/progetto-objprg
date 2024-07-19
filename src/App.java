@@ -8,6 +8,7 @@
 
 import controller.Controller;
 import view.View;
+import model.Database;
 import model.esami.*;
 
 public class App {
@@ -15,8 +16,10 @@ public class App {
 		
 		// Linking tra controller e view.
 		// In view sono definiti table e tableModel, mentre in controller è definito database. 
+		Database database = new Database();
 		Controller controller = new Controller();
 		View view = new View(controller);
+		controller.setDatabase(database);
 		controller.setView(view);
 		
 		// Mostra l'interfaccia grafica all'utente
