@@ -41,6 +41,10 @@ public class EsamiTable extends JTable{
 		setRowSorter(sorter);
 	}
 	
+	public void updateTable() {
+		tableModel.fireTableDataChanged();
+	}
+	
 	public Controller getController() {
 		return controller;
 	}

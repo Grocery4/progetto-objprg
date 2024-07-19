@@ -3,13 +3,14 @@
  */
 package model.esami;
 
+import java.io.Serializable;
+
 /* 
  * L'idea è quella di creare una GUI in modo tale da costringere il programma
  * ad avere sempre il numero giusto di parametri, per esempio presentando un errore
  * in caso di valori nulli, così da non dover passare valori "vuoti" all'oggetto.
  */
-public abstract class Esame{
-	//TODO aggiungere data
+public abstract class Esame implements Serializable {
 	private int ID;
 	private int matricola;
 	private String nome;

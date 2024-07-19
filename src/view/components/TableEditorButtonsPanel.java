@@ -1,12 +1,17 @@
 package view.components;
 
 import java.awt.Color;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
@@ -21,6 +26,9 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	private EsamiTable table;
 	private EsamiTableModel tableModel;
 	
+	private JFileChooser fileChooser;
+	private JButton savetoFileBtn;
+	private JButton loadFromFileBtn;
 	private JButton printBtn;
 	
 	private JButton rimuoviRigaBtn;
@@ -46,6 +54,9 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	}
 	
 	private void initializePanel() {
+		fileChooser = new JFileChooser();
+		savetoFileBtn = new JButton("Salva");
+		loadFromFileBtn = new JButton("Carica");
 		printBtn = new JButton("Stampa");
 		rimuoviRigaBtn = new JButton("Rimuovi");
 		modificaRigaBtn = new JButton("Modifica");
@@ -58,6 +69,8 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		votoMedioLabel = new JLabel("Voto Medio: ");
 		mostraStatisticheBtn = new JButton("Stats");
 		
+		savetoFileBtn.addActionListener(this);
+		loadFromFileBtn.addActionListener(this);
 		printBtn.addActionListener(this);
 		rimuoviRigaBtn.addActionListener(this);
 		modificaRigaBtn.addActionListener(this);
@@ -69,7 +82,11 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		resetFilterBtn.setEnabled(false);
 		votoMedioLabel.setVisible(false);
 		mostraStatisticheBtn.setVisible(false);
+		fileChooser.addChoosableFileFilter(new FileFilterEsame());
+		fileChooser.setAcceptAllFileFilterUsed(false);
 		
+		add(savetoFileBtn);
+		add(loadFromFileBtn);
 		add(printBtn);
 		add(rimuoviRigaBtn);
 		add(modificaRigaBtn);
@@ -95,7 +112,27 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = ((JButton) e.getSource()).getText();
 		
-		if(buttonName == "Stampa") {
+		if(buttonName == "Salva") {
+			if(fileChooser.showSaveDialog(getView()) == JFileChooser.APPROVE_OPTION) {
+				try {
+					getController().saveOnFile(fileChooser.getSelectedFile());
+					view.getTable().updateTable();
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(getView(), "Impossibile salvare su file.", "Errore salvataggio", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+		else if(buttonName == "Carica") {
+			if(fileChooser.showOpenDialog(getView()) == JFileChooser.APPROVE_OPTION) {
+				try {
+					getController().loadFromFile(fileChooser.getSelectedFile());
+					view.getTable().updateTable();
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(getView(), "Impossibile caricare da file.", "Errore caricamento", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+		else if(buttonName == "Stampa") {
 			controller.stampaTabella();
 		}
 		else if(buttonName == "Rimuovi") {

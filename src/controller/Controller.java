@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Dialog.ModalityType;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -26,12 +28,12 @@ public class Controller {
 	
 	public void addEsame(Esame e) {
 		database.addToList(e);
-		view.getTableModel().fireTableDataChanged();
+		view.getTable().updateTable();
 	}
 	
 	public void removeEsame(int ID) {
 		database.removeFromList(ID);
-		view.getTableModel().fireTableDataChanged();
+		view.getTable().updateTable();
 		JOptionPane.showMessageDialog(null, "Rimozione avvenuta con successo!");
 	}
 	
@@ -39,7 +41,7 @@ public class Controller {
 	public void editEsame(Esame e) throws ExistingEntryException {
 		int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), ColumnHeaders.ID.ordinal());
 		database.editInList(ID, e);
-		view.getTableModel().fireTableDataChanged();
+		view.getTable().updateTable();
 	}
 	
 	/**
@@ -137,6 +139,14 @@ public class Controller {
 	
 	public List<Esame> getEsamiList(){
 		return database.getEsamiList();
+	}
+	
+	public void saveOnFile(File file) throws IOException {
+		database.saveOnFile(file);
+	}
+	
+	public void loadFromFile(File file) throws IOException {
+		database.loadFromFile(file);
 	}
 	
 	public Esame getEsame(int ID) {

@@ -18,18 +18,12 @@ public class App {
 		// In view sono definiti table e tableModel, mentre in controller è definito database. 
 		Database database = new Database();
 		Controller controller = new Controller();
-		View view = new View(controller);
 		controller.setDatabase(database);
+
+		View view = new View(controller);
 		controller.setView(view);
 		
 		// Mostra l'interfaccia grafica all'utente
 		view.setVisible(true);
-		
-		//TODO REMOVE AFTER TESTING
-		Esame e = new EsameSemplice(2, "a", "b", "c", 2, 24f, false);
-		Esame e2 = new EsameSemplice(3, "ddd", "kkk", "ffff", 3, 30f, true);
-		controller.addEsame(e);
-		controller.addEsame(e2);
-		
 	}
 }

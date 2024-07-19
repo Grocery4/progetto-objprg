@@ -6,7 +6,14 @@
 
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import model.esami.Esame;
@@ -81,6 +88,35 @@ public class Database {
 			if(e1.equals(e)) {return e1.getID();}
 		}
 		return -1;
+	}
+	
+	
+	//TODO gestire same file name
+	public void saveOnFile(File file) throws IOException {
+		FileOutputStream fos = new FileOutputStream(file);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		
+		Esame[] esamiSaved = esamiList.toArray(new Esame[esamiList.size()]);
+		oos.writeObject(esamiSaved);
+		
+		
+		oos.close();
+		fos.close();
+	}
+	
+	public void loadFromFile(File file) throws IOException {
+		FileInputStream fis = new FileInputStream(file);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		
+		try {
+			Esame[] esamiLoaded = (Esame[]) ois.readObject();
+			
+			esamiList.clear();
+			esamiList.addAll(Arrays.asList(esamiLoaded));
+			
+		} catch (ClassNotFoundException e) {
+			System.err.println(e);
+		}
 	}
 
 	public List<Esame> getEsamiList() {
