@@ -17,8 +17,6 @@ import controller.Controller;
 import view.components.*;
 import model.EsamiTableModel;
 
-//TODO debate whether to use getters or use attributes directly
-//TODO aggiungere sysout quando si fa qualcosa in GUI
 public class View extends JFrame {
 	private Controller controller;
 	private BorderLayout frameLayout;

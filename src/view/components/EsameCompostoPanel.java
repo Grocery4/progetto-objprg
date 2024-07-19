@@ -23,7 +23,6 @@ import view.errors.*;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
-//TODO add flashing error in both EsameSemplice & EsameComposto
 public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 
 	private View view;

@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import view.View;
 import javax.swing.BoxLayout;
 
-//TODO rename SidePanelBoxLayout to SidePanel once the view is fully fixed.
 public class SidePanel extends JPanel implements ActionListener{
 	private View view;
 
