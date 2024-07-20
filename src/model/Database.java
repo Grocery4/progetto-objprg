@@ -87,13 +87,12 @@ public class Database {
 	 * @param ID Identificatore dell'esame.
 	 * @return Esame identificato da id.
 	 */
-	public Esame getEsame(int ID) {
-		for(int i = 0; i < esamiList.size(); i++) {
-			Esame e = esamiList.get(i);
-			if(e.getID() == ID)
-				return esamiList.get(ID);
+	public Esame findEsameById(int idEsame) {
+		for(Esame e : esamiList) {
+			if(e.getID() == idEsame) {
+				return e;
+			}
 		}
-		
 		return null;
 	}
 	
@@ -148,15 +147,6 @@ public class Database {
 		return -1;
 	}
 	
-	private Esame findEsameById(int idEsame) {
-		for(Esame e : esamiList) {
-			if(e.getID() == idEsame) {
-				return e;
-			}
-		}
-		return null;
-	}
-
 	public List<Esame> getEsamiList() {
 		return esamiList;
 	}

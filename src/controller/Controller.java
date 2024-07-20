@@ -155,7 +155,7 @@ public class Controller {
 	}
 	
 	public Esame getEsame(int ID) {
-		return database.getEsame(ID);
+		return database.findEsameById(ID);
 	}
 	
 	public Database getDatabase() {
