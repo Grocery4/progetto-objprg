@@ -1,4 +1,6 @@
-/** @file Database.java
+/** 
+ * @file Database.java
+ * 
 * La classe rappresenta la parte back-end dell'applicazione, qui si memorizzano e manipolano i dati immessi o richiesti dall'utente. 
 * La struttura dati usata per memorizzare gli esami immessi nel programma è una ArrayList di lunghezza variabile, che utilizza numeri interi positivi come indice
 * per identificarli.
@@ -38,7 +40,7 @@ public class Database {
 	 * @return true se l'esame viene aggiunto correttamente alla lista, false se l'esame inserito è già presente.
 	 */
 	public boolean addToList(Esame esame) {
-		if(findEsameInList(esame) != -1) {return false;}
+		if(getEsameIndex(esame) != -1) {return false;}
 		
 		esame.setID(getLastId());
 		esamiList.add(esame);
@@ -49,57 +51,58 @@ public class Database {
 	/**
 	 * Metodo per l'eliminazione dell'esame dalla lista.
 	 * Controlla ogni esame all'interno della lista e compara l'ID con quello preso in input.
-	 * Non elimina utilizzando direttamento l'ID preso in input in quanto non corrisponde con l'ID dell'esame
-	 * ma con l'ID dell'elemento all'interno dell'ArrayList.
+	 * Non elimina utilizzando direttamento l'ID preso in input in quanto corrisponde ID dell'oggetto esame
+	 * e non all'indice dell'elemento all'interno dell'ArrayList.
 	 * 
-	 * @param ID id dell'esame da eliminare.
+	 * @param ID Id dell'esame da eliminare.
 	 */
-	public void removeFromList(int ID) {
-		for(Esame e : esamiList) {
-			if(e.getID() == ID) {
-				esamiList.remove(e); 
-				return;
-			}
-		}
+	public boolean removeFromList(int idEsame) {
+		Esame e = findEsameById(idEsame);
+		if(e == null) {return false;}
+		
+		esamiList.remove(e);
+		return true;
 	}
 	
 	/**
 	 * Metodo per l'aggiornamento di un elemento appartenente alla lista.
 	 * Identifica l'elemento da modificare con il nuovo esame.
 	 * 
-	 * @param ID id dell'esame da modificare
+	 * @param ID id dell'esame da modificare.
 	 * @param e Nuovo esame da inserire nella lista.
+	 * @return true se l'operazione ha avuto successo, false altrimenti.
 	 */
-	public void editInList(int ID, Esame e) {
-		esamiList.add(ID, e);
+	public boolean editInList(int idEsame, Esame e) {
+		Esame esameInList = findEsameById(idEsame);
+		
+		if(esameInList == null) {return false;}
+
+		esameInList = e;
+		return true;
 	}
 	
 	/**
 	 * Metodo per recuperare uno specifico esame dalla lista.
 	 * 
-	 * @param ID Identificatore dell'esame
-	 * @return Esame identificato da id
+	 * @param ID Identificatore dell'esame.
+	 * @return Esame identificato da id.
 	 */
 	public Esame getEsame(int ID) {
-		return esamiList.get(ID);
-	}
-
-	/**
-	 * Controlla la presenza dell'esame all'interno della lista confrontandolo uno per uno con ogni elemento.
-	 * In caso di grandi quantità di dati, il metodo risulta non essere efficiente.
-	 * 
-	 * @param e Esame per cui si controlla la presenza all'interno della lista.
-	 * @return indice dell'esame se presente, -1 altrimenti.
-	 */
-	private int findEsameInList(Esame e) {
-		for(Esame e1 : esamiList) {
-			if(e1.equals(e)) {return e1.getID();}
+		for(int i = 0; i < esamiList.size(); i++) {
+			Esame e = esamiList.get(i);
+			if(e.getID() == ID)
+				return esamiList.get(ID);
 		}
-		return -1;
+		
+		return null;
 	}
 	
-	
-	//TODO gestire same file name
+	/**
+	 * Salva l'attuale lista di esami (esamiList) nel file specificato.
+	 *
+	 * @param file Il file in cui verranno salvati gli esami
+	 * @throws IOException
+	 */
 	public void saveOnFile(File file) throws IOException {
 		FileOutputStream fos = new FileOutputStream(file);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -107,11 +110,16 @@ public class Database {
 		Esame[] esamiSaved = esamiList.toArray(new Esame[esamiList.size()]);
 		oos.writeObject(esamiSaved);
 		
-		
 		oos.close();
 		fos.close();
 	}
 	
+	/**
+	 * Carica una lista di esami dal file specificato e aggiorna l'attuale lista (esamiList).
+	 *
+	 * @param file Il file da cui verranno caricati gli esami
+	 * @throws IOException
+	 */
 	public void loadFromFile(File file) throws IOException {
 		FileInputStream fis = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(fis);
@@ -125,6 +133,28 @@ public class Database {
 		} catch (ClassNotFoundException e) {
 			System.err.println(e);
 		}
+	}
+	
+	/**
+	 * Controlla la presenza dell'esame all'interno della lista confrontandolo uno per uno con ogni elemento.
+	 * 
+	 * @param e Esame per cui si controlla la presenza all'interno della lista.
+	 * @return Posizione dell'esame all'interno dell'ArrayList se presente, -1 altrimenti.
+	 */
+	private int getEsameIndex(Esame e) {
+		for(int index = 0; index < esamiList.size(); index++) {
+			if(esamiList.get(index).equals(e)) {return index;}
+		}
+		return -1;
+	}
+	
+	private Esame findEsameById(int idEsame) {
+		for(Esame e : esamiList) {
+			if(e.getID() == idEsame) {
+				return e;
+			}
+		}
+		return null;
 	}
 
 	public List<Esame> getEsamiList() {
