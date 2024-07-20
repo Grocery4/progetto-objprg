@@ -73,10 +73,6 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	private boolean lode;
 	private float votoFinale;
 	
-	private List<Float> votoIntermedioArray;
-	private List<Float> pesoIntermedioArray;
-	
-	
 	public EsameCompostoPanel(View view) {
 		formLockedStatus = false;
 		
@@ -336,9 +332,6 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 				if(arrayIndex == numProveIntermedie) {
 					addButton.setEnabled(false);
 					
-					pesoArray = pesoIntermedioArray.toArray(new Float[numProveIntermedie]);
-					votoArray = votoIntermedioArray.toArray(new Float[numProveIntermedie]);
-					
 					votoFinale = EsameComposto.calcolaVotoFinale(numProveIntermedie, pesoArray, votoArray);
 					
 					//votoFinale viene usato solo per mostrarne il valore nella GUI
@@ -371,8 +364,9 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		float votoIntermedio = Float.parseFloat(votoIntermedioTextArea.getText());
 		float pesoIntermedioPercentage = Float.parseFloat(pesoIntermedioTextArea.getText());
 
-		votoIntermedioArray.add(votoIntermedio);
-		pesoIntermedioArray.add(pesoIntermedioPercentage);
+		votoArray[arrayIndex] = votoIntermedio;
+		pesoArray[arrayIndex] = pesoIntermedioPercentage;
+		
 		arrayIndex++;
 		
 		votoIntermedioTextArea.setText("");
@@ -408,8 +402,8 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	//TODO find a way to get rid of votoIntermedioArray & pesoIntermedioArray in favor of using pesoArray & votoArray directly
 	private void initializeArrays() {
 		arrayIndex = 0;
-		votoIntermedioArray = new ArrayList<Float>();
-		pesoIntermedioArray = new ArrayList<Float>();
+		pesoArray = new Float[numProveIntermedie];
+		votoArray = new Float[numProveIntermedie];
 	}
 	
 	private void initializeForm() {
