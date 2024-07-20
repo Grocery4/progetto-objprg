@@ -65,12 +65,17 @@ public class Controller {
 	}
 	
 	/**
-	 * Rimuove il filtro applicato alla tabella.
+	 * Metodo che rimuove il filtro applicato alla tabella.
 	 */
 	public void resetFilter() {
 		view.getTable().getSorter().setRowFilter(null);
 	}
 	
+	/**
+	 * Metodo per il calcolo del voto medio sui valori restituiti dal filtro.
+	 * 
+	 * @return Voto medio dato dalla media ponderata basata sui crediti di ogni esame
+	 */
 	public float calcolaVotoMedio() {
 		float sommaProdotti;
 		int cfuTotali;
