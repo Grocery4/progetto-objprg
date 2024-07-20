@@ -107,7 +107,8 @@ public class Database {
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 		
 		Esame[] esamiSaved = esamiList.toArray(new Esame[esamiList.size()]);
-		oos.writeObject(esamiSaved);
+		EsameData esameData = new EsameData(esamiSaved, lastId);
+		oos.writeObject(esameData);
 		
 		oos.close();
 		fos.close();
@@ -124,10 +125,11 @@ public class Database {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		
 		try {
-			Esame[] esamiLoaded = (Esame[]) ois.readObject();
+			EsameData esameData = (EsameData) ois.readObject(); 
 			
 			esamiList.clear();
-			esamiList.addAll(Arrays.asList(esamiLoaded));
+			esamiList.addAll(Arrays.asList(esameData.getEsamiList()));
+			setLastId(esameData.getLastId());
 			
 		} catch (ClassNotFoundException e) {
 			System.err.println(e);
