@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,6 @@ import javax.swing.border.LineBorder;
 import model.esami.EsameComposto;
 import view.View;
 import view.errors.*;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
@@ -48,8 +46,8 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	private JLabel lblVotoIntermedio;
 	private JTextArea votoIntermedioTextArea;
 	private JTextArea pesoIntermedioTextArea;
-	JButton addButton;
-	private JTextArea proveIntermedieTextArea;
+	private JButton addButton;
+	
 	private JLabel votoFinaleLabel;
 	private JTextArea votoFinaleTextArea;
 	
@@ -126,9 +124,6 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		addButton.setEnabled(false);
 		addButton.addActionListener(this);
 		
-		proveIntermedieTextArea = new JTextArea(10, 15);
-		proveIntermedieTextArea.setEditable(false);
-
 		votoFinaleLabel = new JLabel("Voto finale: ");
 		votoFinaleTextArea = new JTextArea(1, 3);
 		votoFinaleTextArea.setEditable(false);
@@ -150,7 +145,6 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		numProveIntermedieTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		votoIntermedioTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		pesoIntermedioTextArea.setBorder(new LineBorder(Color.BLACK, 1));
-		proveIntermedieTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		votoFinaleTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		
 		gbc.insets = new Insets(15,0,15,0);
@@ -226,12 +220,6 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		add(pesoIntermedioTextArea, gbc);
 		gbc.gridx = 2;
 		add(addButton, gbc);
-		
-		gbc.gridwidth = 3;
-		gbc.gridheight = 1;
-		gbc.gridx = 0;
-		gbc.gridy = 9;
-		add(proveIntermedieTextArea, gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
@@ -347,9 +335,6 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 				
 				if(arrayIndex == numProveIntermedie) {
 					addButton.setEnabled(false);
-					
-					proveIntermedieTextArea.setText("Voti: " + votoIntermedioArray.toString() + "\n" + "Pesi: " + pesoIntermedioArray.toString());
-					proveIntermedieTextArea.setVisible(true);
 					
 					pesoArray = pesoIntermedioArray.toArray(new Float[numProveIntermedie]);
 					votoArray = votoIntermedioArray.toArray(new Float[numProveIntermedie]);
