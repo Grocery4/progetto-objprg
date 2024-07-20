@@ -273,7 +273,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		initializeArrays();
 		initializeForm();
 		setFormLockedStatus(false);
-		lockForm(isFormLockedStatus());
+		lockForm(isFormLocked());
 	}
 
 	public void confirmFirstFormContent() {
@@ -284,7 +284,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		cfu = 0;
 		numProveIntermedie = 0;
 		
-		if(!isFormLockedStatus()) {			
+		if(isFormLocked() == false) {			
 			try {
 				checkNullInputs();
 				
@@ -299,7 +299,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 				
 				initializeArrays();
 				setFormLockedStatus(true);
-				lockForm(isFormLockedStatus());
+				lockForm(isFormLocked());
 			} catch (Exception e) {
 				System.err.println(e);
 			} 
@@ -317,7 +317,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	}
 	
 	public void updateArrayIntermedio() {
-		if(!isFormLockedStatus()) {
+		if(isFormLocked() == false) {
 			System.err.println("form non ancora compilato");
 		} else {			
 			try {
@@ -422,7 +422,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		this.view = view;
 	}
 	
-	public boolean isFormLockedStatus() {
+	public boolean isFormLocked() {
 		return formLockedStatus;
 	}
 	public void setFormLockedStatus(boolean formLockedStatus) {
