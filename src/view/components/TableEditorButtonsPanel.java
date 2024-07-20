@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -115,12 +116,29 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		if(buttonName == "Salva") {
 			if(fileChooser.showSaveDialog(getView()) == JFileChooser.APPROVE_OPTION) {
 				try {
-					getController().saveOnFile(fileChooser.getSelectedFile());
-					view.getTable().updateTable();
-				} catch (IOException ex) {
+					File selectedFile = fileChooser.getSelectedFile();
+					if (selectedFile.exists()) { 
+
+						// Richiesta di sovrascrittura
+						int response = JOptionPane.showConfirmDialog(
+							getView(),
+							"Sovrascrivere file?",
+							"Conferma Sovrascrittura",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.WARNING_MESSAGE
+						);
+						if (response != JOptionPane.YES_OPTION) {
+							return;
+						}
+					}
+					
+					getController().saveOnFile(selectedFile);
+					view.getTable().updateTable();}
+				
+				catch (IOException ex) {
 					JOptionPane.showMessageDialog(getView(), "Impossibile salvare su file.", "Errore salvataggio", JOptionPane.ERROR_MESSAGE);
 				}
-			}
+			}	
 		}
 		else if(buttonName == "Carica") {
 			if(fileChooser.showOpenDialog(getView()) == JFileChooser.APPROVE_OPTION) {
