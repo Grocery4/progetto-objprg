@@ -18,12 +18,11 @@ import view.components.*;
 import model.EsamiTableModel;
 
 public class View extends JFrame {
-	private Controller controller;
-	private BorderLayout frameLayout;
 	private SidePanel sidePanel;
 	private TableEditorButtonsPanel editorPanel;
-	
 	private JScrollPane tableScrollPane;
+	
+	private Controller controller;
 	private EsamiTableModel tableModel;
 	private EsamiTable table;
 	
@@ -42,8 +41,7 @@ public class View extends JFrame {
 	 * Inizializza il frame, layout, titolo, comportamento di chiusura e le dimensioni predefinite.
 	*/
 	private void initializeFrameSettings() {
-		frameLayout = new BorderLayout();
-		setLayout(frameLayout);
+		setLayout(new BorderLayout());
 		setTitle("Gestore Esami");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -54,17 +52,14 @@ public class View extends JFrame {
 	*/
 	private void initializeFramePanels() {
 		sidePanel = new SidePanel(this);
-		add(sidePanel, BorderLayout.WEST);
-		
 		tableModel = new EsamiTableModel(controller.getEsamiList());
 		table = new EsamiTable(controller, tableModel);
-		
 		tableScrollPane = new JScrollPane(table);
-		add(tableScrollPane, BorderLayout.CENTER);
-		
 		editorPanel = new TableEditorButtonsPanel(this, controller, table);
+
+		add(sidePanel, BorderLayout.WEST);
+		add(tableScrollPane, BorderLayout.CENTER);
 		add(editorPanel, BorderLayout.SOUTH);
-		
 	}
 	
 	public Controller getController() {
