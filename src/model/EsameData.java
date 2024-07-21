@@ -1,7 +1,12 @@
+/**
+ * @file EsameData.java
+ * 
+ * La classe EsameData funge da wrapper per serializzare l'array di oggetti Esame e l'ultimo ID utilizzato.
+ */
+
 package model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import model.esami.Esame;
 

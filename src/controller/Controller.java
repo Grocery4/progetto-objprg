@@ -1,3 +1,14 @@
+/**
+ * @file Controller.java
+ * 
+ * La classe Controller gestisce l'interazione tra la vista e il modello nell'applicazione
+ * tramite un approccio MVC (Model-View-Controller) per separare le responsabilità tra le varie parti del programma.
+ * 
+ * Questa classe gestisce le operazioni di aggiunta, rimozione, modifica e filtraggio degli esami.
+ * Contiene metodi per aggiornare la vista in base ai dati nel modello, gestire le eccezioni e 
+ * visualizzare grafici e risultati di stampa.
+ */
+
 package controller;
 
 import java.awt.Dialog.ModalityType;
@@ -20,34 +31,47 @@ import model.Database;
 import model.esami.Esame;
 import view.View;
 import view.components.ColumnHeaders;
-import view.errors.ExistingEntryException;
 
 public class Controller {
 	private Database database;
 	private View view;
 	
-	public void addEsame(Esame e) throws ExistingEntryException {
-		if(database.addToList(e) == false) {throw new ExistingEntryException("esame già presente nella tabella.");}
+	/**
+	 * Metodo per l'aggiunta di un esame al database e conseguente aggiornamento sulla tabella.
+	 * 
+	 * @param e Esame da aggiungere
+	 */
+	public void addEsame(Esame e) {
+		database.addToList(e);
 		view.getTable().updateTable();
 	}
 	
+	/**
+	 * Metodo per la rimozione di un esame dal database e conseguente aggiornamento della tabella.
+	 * 
+	 * @param ID Id dell'esame da rimuovere
+	 */
 	public void removeEsame(int ID) {
 		database.removeFromList(ID);
 		view.getTable().updateTable();
 		JOptionPane.showMessageDialog(null, "Rimozione avvenuta con successo!");
 	}
 	
-	//TODO FINISH AND TEST METHOD
-	public void editEsame(Esame e) throws ExistingEntryException {
-		
-		
-		int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), ColumnHeaders.ID.ordinal());
-		if(database.editInList(ID, e) == false) {throw new ExistingEntryException("esame già presente nella tabella.");}
+	/**
+	 * Metodo per la modifica dell'esame all'interno del database.
+	 * Trova l'esame esistente con l'ID specificato e lo sostituisce con l'esame aggiornato.
+	 * Successivamente, aggiorna la tabella nella vista per riflettere le modifiche.
+	 * 
+	 * @param idEsame Id dell'esame da modificare.
+	 * @param esameAggiornato L'oggetto Esame contenente i dati aggiornati.
+	 */
+	public void editEsame(int idEsame, Esame esameAggiornato) {
+		database.editInList(idEsame, esameAggiornato);
 		view.getTable().updateTable();
 	}
 	
 	/**
-	 * Il seguente metodo filtra i dati nella tabella in base alla query e al tipo di filtro specificati.
+	 * Metodo per la filtrazione dei dati nella tabella in base alla query e al tipo di filtro specificati.
 	 *
 	 * @param query      La stringa di ricerca utilizzata per filtrare i dati nella tabella. 
 	 *                   Se la query è vuota o contiene solo spazi, il metodo non applica alcun filtro.
@@ -69,7 +93,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Metodo che rimuove il filtro applicato alla tabella.
+	 * Metodo per la rimozione del filtro applicato alla tabella.
 	 */
 	public void resetFilter() {
 		view.getTable().getSorter().setRowFilter(null);
@@ -101,6 +125,14 @@ public class Controller {
 		return sommaProdotti / cfuTotali;
 	}
 	
+	/**
+	 * Metodo che mostra un grafico a barre delle statistiche dei voti finali degli esami.
+	 * Crea un dataset con i voti finali degli esami e lo utilizza per generare un grafico a barre
+	 * che viene visualizzato in una finestra di dialogo modale.
+	 * 
+	 * @param col La colonna della tabella che contiene le categorie da confrontare nel grafico.
+	 * @param category La descrizione della categoria utilizzata come etichetta sull'asse delle ascisse del grafico.
+	 */
 	public void mostraStatistiche(int col, String category) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
@@ -130,7 +162,8 @@ public class Controller {
 		dialog.setVisible(true);
 	}
 	
-	/** stampaTabella() utilizza il metodo JTable.print() per stampare la tabella, e
+	/**
+	 * Il metodo stampaTabella() sfrutta il metodo JTable.print() per stampare la tabella, e
 	 * attraverso un try/catch mostra il risultato dell'operazione sottoforma di finestra di dialogo.
 	 */
 	public void stampaTabella() {
@@ -144,6 +177,16 @@ public class Controller {
         } catch (Exception pe) {
             System.err.println(pe.getMessage());
         }
+	}
+	
+	/**
+	 * Metodo per recuperare uno specifico esame dalla lista.
+	 * 
+	 * @param ID Identificatore dell'esame.
+	 * @return Esame identificato da id.
+	 */
+	public Esame findEsameById (int idEsame) {
+		return database.findEsameById(idEsame);
 	}
 	
 	public List<Esame> getEsamiList(){

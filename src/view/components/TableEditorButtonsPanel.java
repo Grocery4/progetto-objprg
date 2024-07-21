@@ -1,6 +1,7 @@
 package view.components;
 
 import java.awt.Color;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -152,12 +154,12 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 			controller.stampaTabella();
 		}
 		else if(buttonName == "Rimuovi") {
-			int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), 0);
+			int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), ColumnHeaders.ID.ordinal());
 			controller.removeEsame(ID);
 		} 
-//		else if (buttonName == "Modifica") {
-//			controller.editEsame();
-//		} 
+		else if (buttonName == "Modifica") {
+			showModifierPanel();			
+		} 
 		else if (buttonName == "Cerca") {
 			String query = filterTextArea.getText();
 			String filterName = (String) filterType.getSelectedItem();
@@ -189,6 +191,17 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 				controller.mostraStatistiche(ColumnHeaders.NOMECOMPLETO.ordinal(), "Nome Completo");
 			}
 		}
+	}
+
+	private void showModifierPanel() {
+		int idEsame = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), ColumnHeaders.ID.ordinal());
+		
+		EsameModifierPanel panel = new EsameModifierPanel(getView(), idEsame);
+		JDialog dialog = new JDialog(getView(), "Modifica Esame");
+		dialog.setContentPane(panel);
+		dialog.setModalityType(ModalityType.APPLICATION_MODAL);
+		dialog.pack();
+		dialog.setVisible(true);
 	}
 
 	public EsamiTable getTable() {

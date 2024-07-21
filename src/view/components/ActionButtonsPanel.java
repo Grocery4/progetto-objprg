@@ -1,7 +1,7 @@
 /**
  * @file ActionButtonsPanel.java
  * 
- * "Sotto-pannello" riutilizzabile per aggiungere i pulsanti Conferma e Annulla ad un pannello, il cui scopo è
+ * Sotto-pannello per aggiungere i pulsanti Conferma e Annulla ad un pannello, il cui scopo è
  * semplificare il codice e aumentarne la leggibilità. 
  */
 

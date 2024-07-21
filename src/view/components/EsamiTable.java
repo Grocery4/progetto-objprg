@@ -1,6 +1,15 @@
+/**
+ * @file EsamiTable.java
+ * 
+ * Classe per la gestione, visualizzazione e interazione con una tabella di esami.
+ * 
+ * Questa classe estende JTable per personalizzare la visualizzazione degli esami e fornire funzionalità aggiuntive 
+ * come l'ordinamento delle righe e la gestione dei doppi click del mouse per visualizzare le prove intermedie.
+ * 
+ */
+
 package view.components;
 
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

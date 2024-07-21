@@ -1,10 +1,14 @@
-/** @file EsameComposto.java */
+/** 
+ * @file EsameComposto.java
+ * 
+ * Tipologia di Esame, discendente dalla classe Esame.
+ */
 
 package model.esami;
 
-import java.util.Arrays;
-
 public class EsameComposto extends Esame{
+	private static final long serialVersionUID = 1L;
+	
 	private int numeroProveIntermedie;
 	private Float[] pesoProveIntermediePercentage;
 	private Float[] votiProveIntermedie;
@@ -33,6 +37,7 @@ public class EsameComposto extends Esame{
 	
     /**
      * Calcola il voto finale facendo la media ponderata delle prove intermedie dopo aver normalizzato i pesi.
+     * 
      * @param numeroProveIntermedie Numero di prove intermedie.
      * @param pesoProveIntermediePercentage Percentuale di peso di ciascuna prova intermedia.
      * @param votiProveIntermedie Voti ottenuti nelle prove intermedie.
@@ -47,9 +52,7 @@ public class EsameComposto extends Esame{
 			float pesoNormalizzato = pesoProveIntermediePercentage[i] / sommaPesi;
 			mediaPonderata += votiProveIntermedie[i] * pesoNormalizzato;
 		}
-		
 		return mediaPonderata;
-		
 	}
 	
 	public int getNumeroProveIntermedie() {
@@ -72,5 +75,4 @@ public class EsameComposto extends Esame{
 	public void setVotiProveIntermedie(Float[] votiProveIntermedie2) {
 		this.votiProveIntermedie = votiProveIntermedie2;
 	}
-	
 }

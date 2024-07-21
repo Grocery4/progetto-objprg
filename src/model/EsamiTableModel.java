@@ -1,3 +1,11 @@
+/**
+ * @file EsamiTableModel.java
+ * 
+ * La classe EsamiTableModel estende AbstractTableModel per fornire un modello di tabella personalizzato
+ * per la visualizzazione degli esami nella tabella.
+
+ */
+
 package model;
 
 import java.util.List;

@@ -1,10 +1,10 @@
 /** 
  * @file Database.java
  * 
-* La classe rappresenta la parte back-end dell'applicazione, qui si memorizzano e manipolano i dati immessi o richiesti dall'utente. 
-* La struttura dati usata per memorizzare gli esami immessi nel programma è una ArrayList di lunghezza variabile, che utilizza numeri interi positivi come indice
-* per identificarli.
-*/
+ * La classe rappresenta la parte logica dell'applicazione, qui si memorizzano e manipolano i dati immessi o richiesti dall'utente. 
+ * La struttura dati usata per memorizzare gli esami immessi nel programma è una ArrayList di lunghezza variabile, che utilizza numeri interi positivi come indice
+ * per identificarli.
+ */
 
 package model;
 
@@ -26,7 +26,7 @@ public class Database {
 	
 	/**
 	 * Inizializza la struttura dati su cui si basa l'applicazione.
-	 * Si crea una nuova lista di esami e si inizializza l'id a 0.
+	 * Si crea una nuova lista di esami e si inizializza l'id da incrementare ad ogni aggiunta a 0.
 	 */
 	public Database() {
 		esamiList = new ArrayList<>();
@@ -51,7 +51,7 @@ public class Database {
 	/**
 	 * Metodo per l'eliminazione dell'esame dalla lista.
 	 * Controlla ogni esame all'interno della lista e compara l'ID con quello preso in input.
-	 * Non elimina utilizzando direttamento l'ID preso in input in quanto corrisponde ID dell'oggetto esame
+	 * Non elimina utilizzando direttamento l'ID preso in input in quanto corrisponde all'ID dell'oggetto esame
 	 * e non all'indice dell'elemento all'interno dell'ArrayList.
 	 * 
 	 * @param ID Id dell'esame da eliminare.
@@ -73,16 +73,17 @@ public class Database {
 	 * @return true se l'operazione ha avuto successo, false altrimenti.
 	 */
 	public boolean editInList(int idEsame, Esame e) {
-		Esame esameInList = findEsameById(idEsame);
+		int indexEsame = getEsameIndex(findEsameById(idEsame));
 		
-		if(esameInList == null) {return false;}
+		if(indexEsame == -1) {return false;}
 
-		esameInList = e;
+		e.setID(esamiList.get(indexEsame).getID());
+		esamiList.set(indexEsame, e);
 		return true;
 	}
 	
 	/**
-	 * Metodo per recuperare uno specifico esame dalla lista.
+	 * Metodo per recuperare uno specifico esame dalla lista partendo dal suo id.
 	 * 
 	 * @param ID Identificatore dell'esame.
 	 * @return Esame identificato da id.
@@ -134,6 +135,9 @@ public class Database {
 		} catch (ClassNotFoundException e) {
 			System.err.println(e);
 		}
+		
+		ois.close();
+		fis.close();
 	}
 	
 	/**

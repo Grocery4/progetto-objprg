@@ -1,15 +1,15 @@
 /**
- *  @file App.java 
+ *  @file App.java
  *  @author Judd Russel Kalalo
- * 
- * Questa è la classe che viene invocata per prima, poiché contiene il metodo main.
+ *
+ * Questa è la classe che viene invocata ad inizio programma, poiché contiene il metodo main.
  * Il metodo istanzia gli oggetti di tipo Controller, Database, View per connettere l'interfaccia grafica
  * alla logica del programma, permettendone l'interazione.
  */
 
 import controller.Controller;
-import view.View;
 import model.Database;
+import view.View;
 
 public class App {
 	public static void main(String args[]) {
@@ -19,7 +19,7 @@ public class App {
 
 		View view = new View(controller);
 		controller.setView(view);
-		
+
 		view.setVisible(true);
 	}
 }

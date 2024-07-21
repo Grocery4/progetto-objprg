@@ -1,13 +1,11 @@
 /**
  * @file EsamePickerPanel.java
  * 
- * Pannello composto da due pulsanti destinato alla selezione del tipo di esame.
+ * Sotto-pannello composto da due pulsanti destinato alla selezione del tipo di esame.
  * A seconda della scelta, verrà mostrato il form da compilare adatto.
  */
 
 package view.components;
-
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

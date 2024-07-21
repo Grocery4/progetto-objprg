@@ -1,3 +1,9 @@
+/**
+ * @file EsameCompostoPanel.java
+ * 
+ * Sotto-pannello utilizzato per la compilazione del form inerente ad un esame composto.
+ */
+
 package view.components;
 
 import java.awt.Color;
@@ -6,8 +12,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -77,6 +81,9 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		
 	}
 	
+	/**
+	 * Metodo per l'inizializzazione dei componenti del pannello.
+	 */
 	private void initializePanel() {	
 		gbc = new GridBagConstraints();
 		layout = new GridBagLayout();
@@ -206,6 +213,11 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		add(sendFormButton, gbc);
 	}
 	
+	/**
+	 * Metodo per reindirizzare il click di un pulsante al metodo adeguato.
+	 * 
+	 * @param e Evento generato dal pulsante.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonName = ((JButton) e.getSource()).getText();
@@ -225,6 +237,10 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 				break;
 		}
 	}
+	
+	/**
+	 * Metodo per l'eliminazione dei dati compilati nel form in caso di errore.
+	 */
 	@Override
 	public void resetFormContent() {
 		Component[] components = this.getComponents();
@@ -245,6 +261,9 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		lockForm(isFormLocked());
 	}
 
+	/**
+	 * Metodo per la conferma della prima parte del form riguardante ai dati generali.
+	 */
 	public void confirmFirstFormContent() {
 		nomeStudente = null;
 		materia = null;
@@ -260,17 +279,22 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 				cfu = Integer.parseInt(cfuTextArea.getText());
 				numProveIntermedie = Integer.parseInt(numProveIntermedieTextArea.getText());
 				
-				if(numProveIntermedie < 1) {throw new InvalidRangeException("valore fuori dall'intervallo");}
+				if(numProveIntermedie <= 1) {throw new InvalidRangeException("valore fuori dall'intervallo");}
 				
 				initializeArrays();
 				setFormLockedStatus(true);
 				lockForm(isFormLocked());
 			} catch (Exception e) {
-				System.err.println(e);
+				System.err.println(e.getMessage());
 			} 
 		}
 	}
 
+	/**
+	 * Metodo per il controllo di valori nulli.
+	 * 
+	 * @throws NullInputsException
+	 */
 	private void checkNullInputs() throws NullInputsException {
 		if(nomeStudenteTextArea.getText().isBlank() || 
 				materiaTextArea.getText().isBlank() || 
@@ -280,6 +304,10 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		{throw new NullInputsException("valori nulli inseriti");}
 	}
 	
+	/**
+	 * Metodo per l'aggiornamento della seconda parte del form inerente alle prove intermedie.
+	 * 
+	 */
 	public void updateArrayIntermedio() {
 		if(isFormLocked() == false) {
 			System.err.println("form non ancora compilato");
@@ -318,12 +346,20 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		}
 	}
 
+	/**
+	 * Metodo per il controllo di valori nulli o fuori dal range durante l'inserimento delle prove intermedie.
+	 * @throws NullInputsException
+	 * @throws InvalidRangeException
+	 */
 	private void checkForExceptions() throws NullInputsException, InvalidRangeException {
 		if(votoIntermedioTextArea.getText().isBlank() || pesoIntermedioTextArea.getText().isBlank()) {throw new NullInputsException("null values");}
 		if(Float.parseFloat(votoIntermedioTextArea.getText()) < 18 || Float.parseFloat(votoIntermedioTextArea.getText()) > 30) {throw new InvalidRangeException("voto fuori dall'intervallo");}
 		if(Float.parseFloat(pesoIntermedioTextArea.getText()) < 0 || Float.parseFloat(pesoIntermedioTextArea.getText()) > 100) {throw new InvalidRangeException("peso fuori dall'intervallo");}
 	}
-
+	
+	/**
+	 * Metodo per l'inserimento di voto e peso di una prova intermedia.
+	 */
 	private void addProvaIntermedia() {
 		float votoIntermedio = Float.parseFloat(votoIntermedioTextArea.getText());
 		float pesoIntermedioPercentage = Float.parseFloat(pesoIntermedioTextArea.getText());
@@ -337,6 +373,9 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		pesoIntermedioTextArea.setText("");
 	}
 	
+	/**
+	 * Metodo per l'aggiungimento dell'esame composto all'interno del database, passando prima per il View e successivamente il controller.
+	 */
 	@Override
 	public void sendForm() {
 		lode = lodeCheckBox.isSelected();
@@ -351,6 +390,11 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 
 	}
 	
+	/**
+	 * Metodo che blocca la prima parte del form durante la compilazione del secondo form inerente alle prove intermedie.
+	 * 
+	 * @param formStatus Stato del primo form.
+	 */
 	private void lockForm(boolean formStatus) {
 		nomeStudenteTextArea.setEditable(!formStatus);
 		materiaTextArea.setEditable(!formStatus);
@@ -361,13 +405,18 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		actionButtonsPanel.getBtnConferma().setEnabled(!formStatus);
 	}
 
-	//TODO find a way to get rid of votoIntermedioArray & pesoIntermedioArray in favor of using pesoArray & votoArray directly
+	/**
+	 * Metodo per l'inizializzazione degli array contenenti i dati delle prove intermedie.
+	 */
 	private void initializeArrays() {
 		arrayIndex = 0;
 		pesoArray = new Float[numProveIntermedie];
 		votoArray = new Float[numProveIntermedie];
 	}
 	
+	/**
+	 * Metodo per l'inizializzazione dei dati della prima parte del form.
+	 */
 	private void initializeForm() {
 		nomeStudente = null;
 		materia = null;

@@ -20,7 +20,6 @@ import view.View;
 import view.errors.*;
 
 public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
-
 	private View view;
 	
 	private GridBagLayout layout;
@@ -40,11 +39,11 @@ public class EsameSemplicePanel extends JPanel implements FormActionsInterface {
 
 	
 	public EsameSemplicePanel(View view) {
+
 		setName("esameSemplicePanel");
 		setView(view);
 		
 		initializePanel();
-		
 	}
 	
 	private void initializePanel() {

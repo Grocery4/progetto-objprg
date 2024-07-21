@@ -1,12 +1,18 @@
+/**
+ * @file SidePanel.java
+ * 
+ * Sotto-pannello laterale che contiene bottoni per la selezione di diversi tipi di esami 
+ * e una CardPanel per visualizzare il contenuto corrispondente.
+ * 
+ */
+
 package view.components;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.ScrollPane;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import view.View;
 import javax.swing.BoxLayout;
@@ -24,6 +30,9 @@ public class SidePanel extends JPanel implements ActionListener{
 		initializePanel();
 	}
 	
+	/**
+	 * Metodo per l'inizializzazione dei componenti del pannello.
+	 */
 	public void initializePanel() {
 		layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(layout);
@@ -38,7 +47,12 @@ public class SidePanel extends JPanel implements ActionListener{
 		add(cardPanel);
 		
 	}
-
+	
+	/**
+	 * Metodo per reindirizzare il click di un pulsante al metodo adeguato.
+	 * 
+	 * @param e Evento generato dal pulsante.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if ((((JButton) e.getSource()).getText().equals("Esame Semplice"))) {

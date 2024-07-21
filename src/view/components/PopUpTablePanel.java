@@ -1,3 +1,9 @@
+/**
+ * @file PopUpTablePanel.java
+ * 
+ * Sotto-pannello che mostra gli esiti e i pesi delle prove intermedie di un esame composto.
+ */
+
 package view.components;
 
 import javax.swing.JPanel;

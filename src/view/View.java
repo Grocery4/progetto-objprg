@@ -2,7 +2,7 @@
  * @file View.java
  * 
  * Questa classe rappresenta la finestra principale dell'applicazione del sistema di gestione degli esami.
- * Si occupa della gestione del frame e dell'integrazione dei vari componenti dell'interfaccia utente, oltre
+ * Si occupa della gestione del frame e dell'integrazione dei vari componenti dell'interfaccia utente, oltre che
  * alla comunicazione con il controller.
  */
 
@@ -38,7 +38,7 @@ public class View extends JFrame {
 	}
 	
 	/**
-	 * Inizializza il frame, layout, titolo, comportamento di chiusura e le dimensioni predefinite.
+	 * Metodo per l'inizializzazione del frame, layout, titolo, comportamento di chiusura e le dimensioni predefinite.
 	*/
 	private void initializeFrameSettings() {
 		setLayout(new BorderLayout());
@@ -48,7 +48,7 @@ public class View extends JFrame {
 		setBounds(200,200, 1200, 700);
 	}
 	/**
-	 * Inizializza i pannelli principali del frame.
+	 * Metodo per l'inizializzazione dei pannelli principali del frame.
 	*/
 	private void initializeFramePanels() {
 		sidePanel = new SidePanel(this);

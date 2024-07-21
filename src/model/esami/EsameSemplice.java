@@ -1,10 +1,13 @@
 /** @file EsameSemplice.java
-*  Questa classe rappresenta un esame semplice, estendendo la classe astratta Esame.
-*/
+ * 
+ * Tipologia di Esame, discendente dalla classe Esame.
+ */
 package model.esami;
 
 public class EsameSemplice extends Esame {
-    /**
+    private static final long serialVersionUID = 1L;
+
+	/**
      * Costruttore della classe EsameSemplice.
      * I valori immessi generici sono dati come input al costruttore della classe genitore.
      * I valori specifici alla classe EsameSemplice sono memorizzati tramite appositi setter.
