@@ -1,0 +1,10 @@
+digraph "Grafico della gerarchia delle classi"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node28 [label="JTable",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node28 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="view.components.EsamiTable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classview_1_1components_1_1EsamiTable.html",tooltip=" "];
+}
