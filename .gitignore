@@ -1,9 +1,6 @@
 #ignore binaries
 bin/
 
-#ignore documentation folder
-documentation/
-
 #ignore eclipse settings
 .settings/
 .project
