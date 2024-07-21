@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['removeesame_143',['removeEsame',['../classcontroller_1_1Controller.html#a285005a2a95b9a8e0afa5faba1561330',1,'controller::Controller']]],
-  ['removefromlist_144',['removeFromList',['../classmodel_1_1Database.html#a09502d26d51900736fc2d37e972b1fef',1,'model::Database']]],
-  ['resetfilter_145',['resetFilter',['../classcontroller_1_1Controller.html#a413f01b80c224297180e5f3546a843f8',1,'controller::Controller']]],
-  ['resetformcontent_146',['resetFormContent',['../classview_1_1components_1_1EsameCompostoPanel.html#afeab7278e008e9f1fbe44fe86a8901b4',1,'view::components::EsameCompostoPanel']]]
+  ['nullinputsexception_289',['NullInputsException',['../classview_1_1errors_1_1NullInputsException.html#aad4fc6a57e491be66bd8cc4878e6bb5f',1,'view::errors::NullInputsException']]]
 ];

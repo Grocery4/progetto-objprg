@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>model</b></li><li class="navelem"><a class="el" href="classmodel_1_1Database.html">Database</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacemodel.html">model</a></li><li class="navelem"><a class="el" href="classmodel_1_1Database.html">Database</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -96,17 +96,13 @@ Membri pubblici</h2></td></tr>
 <tr class="memitem:acb9a6eb35b2fd0272ba2a9837a5ca6e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1Database.html#acb9a6eb35b2fd0272ba2a9837a5ca6e8">loadFromFile</a> (File file)  throws IOException </td></tr>
 <tr class="memdesc:acb9a6eb35b2fd0272ba2a9837a5ca6e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carica una lista di esami dal file specificato e aggiorna l'attuale lista (esamiList).  <a href="classmodel_1_1Database.html#acb9a6eb35b2fd0272ba2a9837a5ca6e8">Continua...</a><br /></td></tr>
 <tr class="separator:acb9a6eb35b2fd0272ba2a9837a5ca6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd3c25d33762e5a68c3ca124ad83f7fc"><td class="memItemLeft" align="right" valign="top"><a id="afd3c25d33762e5a68c3ca124ad83f7fc"></a>
-List&lt; <a class="el" href="classmodel_1_1esami_1_1Esame.html">Esame</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getEsamiList</b> ()</td></tr>
+<tr class="memitem:afd3c25d33762e5a68c3ca124ad83f7fc"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classmodel_1_1esami_1_1Esame.html">Esame</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1Database.html#afd3c25d33762e5a68c3ca124ad83f7fc">getEsamiList</a> ()</td></tr>
 <tr class="separator:afd3c25d33762e5a68c3ca124ad83f7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3370b6432c5d7cf8dc391ee2f6431cfe"><td class="memItemLeft" align="right" valign="top"><a id="a3370b6432c5d7cf8dc391ee2f6431cfe"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setEsamiList</b> (ArrayList&lt; <a class="el" href="classmodel_1_1esami_1_1Esame.html">Esame</a> &gt; esamiList)</td></tr>
+<tr class="memitem:a3370b6432c5d7cf8dc391ee2f6431cfe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1Database.html#a3370b6432c5d7cf8dc391ee2f6431cfe">setEsamiList</a> (ArrayList&lt; <a class="el" href="classmodel_1_1esami_1_1Esame.html">Esame</a> &gt; esamiList)</td></tr>
 <tr class="separator:a3370b6432c5d7cf8dc391ee2f6431cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27694e63c77166a3169c0341738c0b93"><td class="memItemLeft" align="right" valign="top"><a id="a27694e63c77166a3169c0341738c0b93"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getLastId</b> ()</td></tr>
+<tr class="memitem:a27694e63c77166a3169c0341738c0b93"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1Database.html#a27694e63c77166a3169c0341738c0b93">getLastId</a> ()</td></tr>
 <tr class="separator:a27694e63c77166a3169c0341738c0b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad707931a4c82d43dfb391eedd5d83661"><td class="memItemLeft" align="right" valign="top"><a id="ad707931a4c82d43dfb391eedd5d83661"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setLastId</b> (int id)</td></tr>
+<tr class="memitem:ad707931a4c82d43dfb391eedd5d83661"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodel_1_1Database.html#ad707931a4c82d43dfb391eedd5d83661">setLastId</a> (int id)</td></tr>
 <tr class="separator:ad707931a4c82d43dfb391eedd5d83661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentazione dei costruttori e dei distruttori</h2>
@@ -178,11 +174,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLastId</b> (int id
 <div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                          {</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">if</span>(getEsameIndex(esame) != -1) {<span class="keywordflow">return</span> <span class="keyword">false</span>;}</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        esame.setID(getLastId());</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        esame.setID(<a class="code" href="classmodel_1_1Database.html#a27694e63c77166a3169c0341738c0b93">getLastId</a>());</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        esamiList.add(esame);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        incrementLastID();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
+<div class="ttc" id="aclassmodel_1_1Database_html_a27694e63c77166a3169c0341738c0b93"><div class="ttname"><a href="classmodel_1_1Database.html#a27694e63c77166a3169c0341738c0b93">model.Database.getLastId</a></div><div class="ttdeci">int getLastId()</div><div class="ttdef"><b>Definition:</b> Database.java:163</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -286,6 +283,62 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLastId</b> (int id
 </div><!-- fragment -->
 </div>
 </div>
+<a id="afd3c25d33762e5a68c3ca124ad83f7fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd3c25d33762e5a68c3ca124ad83f7fc">&#9670;&nbsp;</a></span>getEsamiList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="classmodel_1_1esami_1_1Esame.html">Esame</a>&gt; model.Database.getEsamiList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                                      {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordflow">return</span> esamiList;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a27694e63c77166a3169c0341738c0b93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27694e63c77166a3169c0341738c0b93">&#9670;&nbsp;</a></span>getLastId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int model.Database.getLastId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                           {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordflow">return</span> this.lastId;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="acb9a6eb35b2fd0272ba2a9837a5ca6e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb9a6eb35b2fd0272ba2a9837a5ca6e8">&#9670;&nbsp;</a></span>loadFromFile()</h2>
 
@@ -332,7 +385,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLastId</b> (int id
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            </div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            esamiList.clear();</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            esamiList.addAll(Arrays.asList(esameData.getEsamiList()));</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            setLastId(esameData.getLastId());</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <a class="code" href="classmodel_1_1Database.html#ad707931a4c82d43dfb391eedd5d83661">setLastId</a>(esameData.getLastId());</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        } <span class="keywordflow">catch</span> (ClassNotFoundException e) {</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            System.err.println(e);</div>
@@ -341,6 +394,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLastId</b> (int id
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        ois.close();</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        fis.close();</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    }</div>
+<div class="ttc" id="aclassmodel_1_1Database_html_ad707931a4c82d43dfb391eedd5d83661"><div class="ttname"><a href="classmodel_1_1Database.html#ad707931a4c82d43dfb391eedd5d83661">model.Database.setLastId</a></div><div class="ttdeci">void setLastId(int id)</div><div class="ttdef"><b>Definition:</b> Database.java:166</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -434,6 +488,64 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLastId</b> (int id
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        oos.close();</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        fos.close();</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3370b6432c5d7cf8dc391ee2f6431cfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3370b6432c5d7cf8dc391ee2f6431cfe">&#9670;&nbsp;</a></span>setEsamiList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void model.Database.setEsamiList </td>
+          <td>(</td>
+          <td class="paramtype">ArrayList&lt; <a class="el" href="classmodel_1_1esami_1_1Esame.html">Esame</a> &gt;&#160;</td>
+          <td class="paramname"><em>esamiList</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                                         {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        this.esamiList = esamiList;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad707931a4c82d43dfb391eedd5d83661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad707931a4c82d43dfb391eedd5d83661">&#9670;&nbsp;</a></span>setLastId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void model.Database.setLastId </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                                  {</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        this.lastId = id;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>

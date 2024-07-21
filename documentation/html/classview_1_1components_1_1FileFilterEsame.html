@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>view</b></li><li class="navelem"><b>components</b></li><li class="navelem"><a class="el" href="classview_1_1components_1_1FileFilterEsame.html">FileFilterEsame</a></li>  </ul>
+<li class="navelem"><b>view</b></li><li class="navelem"><a class="el" href="namespaceview_1_1components.html">components</a></li><li class="navelem"><a class="el" href="classview_1_1components_1_1FileFilterEsame.html">FileFilterEsame</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -85,16 +85,79 @@ Diagramma di collaborazione per view.components.FileFilterEsame:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Membri pubblici</h2></td></tr>
-<tr class="memitem:a6f019c4c2255b2506727be41f3ceb85e"><td class="memItemLeft" align="right" valign="top"><a id="a6f019c4c2255b2506727be41f3ceb85e"></a>
-boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classview_1_1components_1_1FileFilterEsame.html#a6f019c4c2255b2506727be41f3ceb85e">accept</a> (File f)</td></tr>
-<tr class="memdesc:a6f019c4c2255b2506727be41f3ceb85e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Il metodo permette esclusivamente l'apertura directory e del file .exam. <br /></td></tr>
+<tr class="memitem:a6f019c4c2255b2506727be41f3ceb85e"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classview_1_1components_1_1FileFilterEsame.html#a6f019c4c2255b2506727be41f3ceb85e">accept</a> (File f)</td></tr>
+<tr class="memdesc:a6f019c4c2255b2506727be41f3ceb85e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Il metodo permette esclusivamente l'apertura directory e del file .exam.  <a href="classview_1_1components_1_1FileFilterEsame.html#a6f019c4c2255b2506727be41f3ceb85e">Continua...</a><br /></td></tr>
 <tr class="separator:a6f019c4c2255b2506727be41f3ceb85e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae31b4866216043d172ed37e570718e37"><td class="memItemLeft" align="right" valign="top"><a id="ae31b4866216043d172ed37e570718e37"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getDescription</b> ()</td></tr>
+<tr class="memitem:ae31b4866216043d172ed37e570718e37"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classview_1_1components_1_1FileFilterEsame.html#ae31b4866216043d172ed37e570718e37">getDescription</a> ()</td></tr>
 <tr class="separator:ae31b4866216043d172ed37e570718e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Documentazione delle funzioni membro</h2>
+<a id="a6f019c4c2255b2506727be41f3ceb85e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f019c4c2255b2506727be41f3ceb85e">&#9670;&nbsp;</a></span>accept()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean view.components.FileFilterEsame.accept </td>
+          <td>(</td>
+          <td class="paramtype">File&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Il metodo permette esclusivamente l'apertura directory e del file .exam. </p>
+<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                  {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">if</span>(f.isDirectory()) {<span class="keywordflow">return</span> <span class="keyword">true</span>;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        String ext = Utils.getExtension(f);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">if</span>(ext.equals(<span class="stringliteral">&quot;exam&quot;</span>)) { <span class="keywordflow">return</span> <span class="keyword">true</span>;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae31b4866216043d172ed37e570718e37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae31b4866216043d172ed37e570718e37">&#9670;&nbsp;</a></span>getDescription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String view.components.FileFilterEsame.getDescription </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                   {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;File Esame (*.exam)&quot;</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
+</div><!-- fragment -->
+</div>
+</div>
 <hr/>La documentazione per questa classe è stata generata a partire dal seguente file:<ul>
-<li>src/view/components/FileFilterEsame.java</li>
+<li>src/view/components/<a class="el" href="FileFilterEsame_8java.html">FileFilterEsame.java</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
