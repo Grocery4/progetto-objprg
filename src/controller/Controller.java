@@ -26,8 +26,8 @@ public class Controller {
 	private Database database;
 	private View view;
 	
-	public void addEsame(Esame e) {
-		database.addToList(e);
+	public void addEsame(Esame e) throws ExistingEntryException {
+		if(database.addToList(e) == false) {throw new ExistingEntryException("esame già presente nella tabella.");}
 		view.getTable().updateTable();
 	}
 	
@@ -40,7 +40,7 @@ public class Controller {
 	//TODO FINISH AND TEST METHOD
 	public void editEsame(Esame e) throws ExistingEntryException {
 		int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), ColumnHeaders.ID.ordinal());
-		database.editInList(ID, e);
+		if(database.editInList(ID, e) == false) {throw new ExistingEntryException("esame già presente nella tabella.");}
 		view.getTable().updateTable();
 	}
 	

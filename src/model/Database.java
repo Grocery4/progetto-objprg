@@ -144,7 +144,7 @@ public class Database {
 	 */
 	private int getEsameIndex(Esame e) {
 		for(int index = 0; index < esamiList.size(); index++) {
-			if(esamiList.get(index).equals(e)) {return index;}
+			if(esamiList.get(index).equals(e) == true) {return index;}
 		}
 		return -1;
 	}
