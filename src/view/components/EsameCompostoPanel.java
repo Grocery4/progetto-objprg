@@ -28,15 +28,11 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	private GridBagLayout layout;
 	private GridBagConstraints gbc;
 	
-	private JLabel lblNome;
-	private JLabel lblCognome;
-	private JLabel lblMatricola;
+	private JLabel lblNomeStudente;
 	private JLabel lblMateria;
 	private JLabel lblCfu;
 	private JLabel lblNumProveIntermedie;
-	private JTextArea nomeTextArea;
-	private JTextArea cognomeTextArea;
-	private JTextArea matricolaTextArea;
+	private JTextArea nomeStudenteTextArea;
 	private JTextArea materiaTextArea;
 	private JTextArea cfuTextArea;
 	private JTextArea numProveIntermedieTextArea;
@@ -61,9 +57,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	
 	private int arrayIndex;
 	
-	private String nome;
-	private String cognome;
-	private int matricola;
+	private String nomeStudente;
 	private String materia;
 	private int cfu;
 	private int numProveIntermedie;
@@ -88,14 +82,8 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		layout = new GridBagLayout();
 		setLayout(layout);
 		
-		lblNome = new JLabel("Nome:");
-		nomeTextArea = new JTextArea(1, 15);
-		
-		lblCognome = new JLabel("Cognome:");
-		cognomeTextArea = new JTextArea(1, 15);
-		
-		lblMatricola = new JLabel("Matricola:");
-		matricolaTextArea = new JTextArea(1, 15);
+		lblNomeStudente = new JLabel("Nome Completo:");
+		nomeStudenteTextArea = new JTextArea(1, 15);
 		
 		lblMateria = new JLabel("Materia:");
 		materiaTextArea = new JTextArea(1, 15);
@@ -133,9 +121,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		sendFormButton.setVisible(false);
 		sendFormButton.addActionListener(this);
 		
-		nomeTextArea.setBorder(new LineBorder(Color.BLACK, 1));
-		cognomeTextArea.setBorder(new LineBorder(Color.BLACK, 1));
-		matricolaTextArea.setBorder(new LineBorder(Color.BLACK, 1));
+		nomeStudenteTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		materiaTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		cfuTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		numProveIntermedieTextArea.setBorder(new LineBorder(Color.BLACK, 1));
@@ -148,31 +134,14 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(lblNome, gbc);
+		add(lblNomeStudente, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		add(nomeTextArea, gbc);
+		add(nomeStudenteTextArea, gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		add(lblCognome, gbc);
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		add(cognomeTextArea, gbc);
-		
-		gbc.gridwidth = 1;
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		add(lblMatricola, gbc);
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		add(matricolaTextArea, gbc);
-		
-		
-		gbc.gridwidth = 1;
-		gbc.gridx = 0;
-		gbc.gridy = 3;
 		add(lblMateria, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
@@ -180,7 +149,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 2;
 		add(lblCfu, gbc);
 		add(lblNumProveIntermedie, gbc);
 		gbc.gridwidth = 2;
@@ -190,7 +159,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 3;
 		add(lblNumProveIntermedie, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
@@ -198,19 +167,19 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		
 		gbc.gridwidth = 3;
 		gbc.gridx = 0;
-		gbc.gridy = 6;
+		gbc.gridy = 4;
 		add(actionButtonsPanel, gbc);
 		
 		gbc.gridwidth = 1;
 		
 		gbc.gridx = 0;
-		gbc.gridy = 7;
+		gbc.gridy = 5;
 		add(lblVotoIntermedio, gbc);
 		gbc.gridx = 1;
 		add(lblPeso, gbc);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 8;
+		gbc.gridy = 6;
 		add(votoIntermedioTextArea, gbc);
 		gbc.gridx = 1;
 		add(pesoIntermedioTextArea, gbc);
@@ -220,20 +189,20 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 		gbc.gridwidth = 1;
 		gbc.gridheight = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 10;
+		gbc.gridy = 7;
 		add(votoFinaleLabel, gbc);
 		gbc.gridx = 1;
 		add(votoFinaleTextArea, gbc);
 		
 		gbc.gridx = 0;
-		gbc.gridy = 11;
+		gbc.gridy = 8;
 		add(lodeLabel, gbc);
 		gbc.gridx = 1;
 		add(lodeCheckBox, gbc);
 		
 		gbc.gridwidth = 3;
 		gbc.gridx = 0;
-		gbc.gridy = 12;
+		gbc.gridy = 9;
 		add(sendFormButton, gbc);
 	}
 	
@@ -277,9 +246,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	}
 
 	public void confirmFirstFormContent() {
-		nome = null;
-		cognome = null;
-		matricola = 0;
+		nomeStudente = null;
 		materia = null;
 		cfu = 0;
 		numProveIntermedie = 0;
@@ -288,9 +255,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 			try {
 				checkNullInputs();
 				
-				nome = nomeTextArea.getText();
-				cognome = cognomeTextArea.getText();
-				matricola = Integer.parseInt(matricolaTextArea.getText());
+				nomeStudente = nomeStudenteTextArea.getText();
 				materia = materiaTextArea.getText();
 				cfu = Integer.parseInt(cfuTextArea.getText());
 				numProveIntermedie = Integer.parseInt(numProveIntermedieTextArea.getText());
@@ -307,8 +272,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	}
 
 	private void checkNullInputs() throws NullInputsException {
-		if(nomeTextArea.getText().isBlank() || 
-				cognomeTextArea.getText().isBlank() || 
+		if(nomeStudenteTextArea.getText().isBlank() || 
 				materiaTextArea.getText().isBlank() || 
 				cfuTextArea.getText().isBlank() || 
 				numProveIntermedieTextArea.getText().isBlank()
@@ -376,7 +340,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	@Override
 	public void sendForm() {
 		lode = lodeCheckBox.isSelected();
-		EsameComposto esame = new EsameComposto(matricola, nome, cognome, materia, cfu, numProveIntermedie, pesoArray, votoArray, lode);
+		EsameComposto esame = new EsameComposto(nomeStudente, materia, cfu, numProveIntermedie, pesoArray, votoArray, lode);
 		
 		try {
 			view.getController().addEsame(esame);
@@ -388,9 +352,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	}
 	
 	private void lockForm(boolean formStatus) {
-		nomeTextArea.setEditable(!formStatus);
-		cognomeTextArea.setEditable(!formStatus);
-		matricolaTextArea.setEditable(!formStatus);
+		nomeStudenteTextArea.setEditable(!formStatus);
 		materiaTextArea.setEditable(!formStatus);
 		cfuTextArea.setEditable(!formStatus);
 		numProveIntermedieTextArea.setEditable(!formStatus);
@@ -407,9 +369,7 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	}
 	
 	private void initializeForm() {
-		nome = null;
-		cognome = null;
-		matricola = 0;
+		nomeStudente = null;
 		materia = null;
 		cfu = 0;
 		numProveIntermedie = 0;
@@ -430,24 +390,10 @@ public class EsameCompostoPanel extends JPanel implements FormActionsInterface {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomeStudente;
 	}
 	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-	
-	public int getMatricola() {
-		return matricola;
-	}
-	public void setMatricola(int matricola) {
-		this.matricola = matricola;
+		this.nomeStudente = nome;
 	}
 
 	public String getMateria() {

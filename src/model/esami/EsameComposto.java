@@ -14,9 +14,7 @@ public class EsameComposto extends Esame{
      * I valori immessi generici sono dati come input al costruttore della classe genitore.
      * I valori specifici alla classe EsameComposto sono memorizzati tramite appositi setter.
      * 
-     * @param matricola Numero di matricola dello studente.
-     * @param nome Nome dello studente.
-     * @param cognome Cognome dello studente.
+     * @param nomeStudente Nome dello studente.
      * @param nomeInsegnamento Nome dell'insegnamento.
      * @param creditiInsegnamento Crediti dell'insegnamento.
      * @param numeroProveIntermedie Numero di prove intermedie.
@@ -24,22 +22,13 @@ public class EsameComposto extends Esame{
      * @param votiProveIntermedie Voti ottenuti nelle prove intermedie.
      * @param lode Indica se l'esame ha la lode.
      */ 
-	public EsameComposto(int matricola, String nome, String cognome, String nomeInsegnamento, int creditiInsegnamento, int numeroProveIntermedie, Float[] pesoProveIntermediePercentage, Float[] votiProveIntermedie, boolean lode) {
-		super(matricola, nome, cognome, nomeInsegnamento, creditiInsegnamento);
+	public EsameComposto(String nomeStudente, String nomeInsegnamento, int creditiInsegnamento, int numeroProveIntermedie, Float[] pesoProveIntermediePercentage, Float[] votiProveIntermedie, boolean lode) {
+		super(nomeStudente, nomeInsegnamento, creditiInsegnamento);
 		setNumeroProveIntermedie(numeroProveIntermedie);
 		setPesoProveIntermediePercentage(pesoProveIntermediePercentage);
 		setVotiProveIntermedie(votiProveIntermedie);
 		setVotoFinale(calcolaVotoFinale(numeroProveIntermedie, pesoProveIntermediePercentage, votiProveIntermedie));
 		setLode(lode);
-	}
-	
-	/** Implementazione concreta del metodo astratto della classe Esame.
-	 * 
-	 * @return Un array di stringhe contenente i dati dell'esame.
-	 */
-	@Override
-	public String[] toColumns() {
-		return new String[] {String.valueOf(super.getID()), String.valueOf(super.getMatricola()), super.getNome(), super.getCognome(), super.getNomeInsegnamento(), String.valueOf(super.getCreditiInsegnamento()), String.valueOf(numeroProveIntermedie), String.valueOf(String.format("%.2f",super.getVotoFinale())), super.lodeToString()};
 	}
 	
     /**

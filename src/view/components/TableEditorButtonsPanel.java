@@ -61,7 +61,7 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		modificaRigaBtn = new JButton("Modifica");
 		filterLabel = new JLabel("Filtra per: ");
 		filterTextArea = new JTextArea(1, 15);
-		filterType = new JComboBox<>(new String[] {"Matricola", "Materia"});
+		filterType = new JComboBox<>(new String[] {"Nome Completo", "Materia"});
 		filtraBtn = new JButton("Cerca");
 		resetFilterBtn = new JButton("X");
 		
@@ -155,9 +155,9 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 			int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), 0);
 			controller.removeEsame(ID);
 		} 
-		//else if (buttonName == "Modifica") {
-			//controller.modificaRiga();
-		//} 
+//		else if (buttonName == "Modifica") {
+//			controller.editEsame();
+//		} 
 		else if (buttonName == "Cerca") {
 			String query = filterTextArea.getText();
 			String filterName = (String) filterType.getSelectedItem();
@@ -183,10 +183,10 @@ public class TableEditorButtonsPanel extends JPanel implements ActionListener {
 		}
 		
 		else if (buttonName == "Stats") {
-			if((String) filterType.getSelectedItem() == "Matricola") {
+			if((String) filterType.getSelectedItem() == "Nome Completo") {
 				controller.mostraStatistiche(ColumnHeaders.MATERIA.ordinal(), "Materia");
 			} else if((String) filterType.getSelectedItem() == "Materia") {
-				controller.mostraStatistiche(ColumnHeaders.MATRICOLA.ordinal(), "Matricola");
+				controller.mostraStatistiche(ColumnHeaders.NOMECOMPLETO.ordinal(), "Nome Completo");
 			}
 		}
 	}

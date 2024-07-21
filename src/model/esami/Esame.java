@@ -14,9 +14,7 @@ public abstract class Esame implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int ID;
-	private int matricola;
-	private String nome;
-	private String cognome;
+	private String nomeStudente;
 	private String nomeInsegnamento;
 	private int creditiInsegnamento;
 	private float votoFinale;
@@ -33,10 +31,8 @@ public abstract class Esame implements Serializable {
      * @param nomeInsegnamento Nome dell'insegnamento.
      * @param creditiInsegnamento Crediti dell'insegnamento.
      */
-	public Esame(int matricola, String nome, String cognome, String nomeInsegnamento, int creditiInsegnamento){
-		setMatricola(matricola);
-		setNome(nome);
-		setCognome(cognome);
+	public Esame(String nomeStudente, String nomeInsegnamento, int creditiInsegnamento){
+		setNomeStudente(nomeStudente);
 		setNomeInsegnamento(nomeInsegnamento);
 		setCreditiInsegnamento(creditiInsegnamento);		
 	}
@@ -48,27 +44,13 @@ public abstract class Esame implements Serializable {
 		ID = iD;
 	}
 	
-	public int getMatricola() {
-		return matricola;
+	public String getNomeStudente() {
+		return nomeStudente;
 	}
-	public void setMatricola(int matricola) {
-		this.matricola = matricola;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome.toUpperCase().trim();
+	public void setNomeStudente(String nome) {
+		this.nomeStudente = nome.toUpperCase().trim();
 	}
 
-	public String getCognome() {
-		return cognome;
-	}
-	public void setCognome(String cognome) {
-		this.cognome = cognome.toUpperCase().trim();
-	}
-	
 	public String getNomeInsegnamento() {
 		return nomeInsegnamento;
 	}
@@ -123,23 +105,4 @@ public abstract class Esame implements Serializable {
 	public void setCreditiInsegnamento(int creditiInsegnamento) {
 		this.creditiInsegnamento = creditiInsegnamento;
 	}
-	/** Metodo che compara due esami, controllando matricola e materia.
-	 * 
-	 * @param e Esame da comparare.
-	 * @return true se gli esami sono uguali, altrimenti false.
-	 */
-	public boolean equals(Esame e) {
-		if(matricola == e.getMatricola() && nomeInsegnamento.equals(e.getNomeInsegnamento())) {
-			return true;
-		}
-		return false;
-	}
-	
-	/** A seconda del tipo di Esame, il metodo toColumns() restituirà un array di String contenenti
-	 * i dati inerenti ad un esame semplice o composto.
-	 * 
-	 * @return Un array di stringhe contenente i dati dell'esame.
-	 */
-	public abstract String[] toColumns();
-
 }

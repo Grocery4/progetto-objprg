@@ -39,6 +39,8 @@ public class Controller {
 	
 	//TODO FINISH AND TEST METHOD
 	public void editEsame(Esame e) throws ExistingEntryException {
+		
+		
 		int ID = (int) view.getTableModel().getValueAt(view.getTable().getSelectedRow(), ColumnHeaders.ID.ordinal());
 		if(database.editInList(ID, e) == false) {throw new ExistingEntryException("esame già presente nella tabella.");}
 		view.getTable().updateTable();
@@ -56,11 +58,13 @@ public class Controller {
 		if (query.isBlank()) {return;} 
 
 		int columnID = 0;
-		if(filterType == "Matricola") {
-			columnID = 1;
+		if(filterType == "Nome Completo") {
+			columnID = ColumnHeaders.NOMECOMPLETO.ordinal();
 		} else if(filterType == "Materia") {
-			columnID = 4;
+			columnID = ColumnHeaders.MATERIA.ordinal();
 		}
+		
+		//?: 0 o 1 caratteri, i: case insensitivity, ^: inizio stringa, $: fine stringa 
 		view.getTable().getSorter().setRowFilter(RowFilter.regexFilter("(?i)^" + query + "$", columnID));
 	}
 	

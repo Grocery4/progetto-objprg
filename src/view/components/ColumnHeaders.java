@@ -2,9 +2,7 @@ package view.components;
 
 public enum ColumnHeaders {
 	ID,
-	MATRICOLA,
-	NOME,
-	COGNOME,
+	NOMECOMPLETO,
 	MATERIA,
 	CFU,
 	NOPROVE,

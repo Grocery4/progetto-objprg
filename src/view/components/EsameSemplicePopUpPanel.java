@@ -28,16 +28,12 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 	private GridBagLayout layout;
 	private GridBagConstraints gbc;
 	
-	private JLabel lblNome;
-	private JLabel lblCognome;
-	private JLabel lblMatricola;
+	private JLabel lblNomeStudente;
 	private JLabel lblMateria;
 	private JLabel lblCfu;
 	private JLabel lblVoto;
 	private JLabel lblLode;
-	private JTextArea nomeTextArea;
-	private JTextArea cognomeTextArea;
-	private JTextArea matricolaTextArea;
+	private JTextArea nomeStudenteTextArea;
 	private JTextArea materiaTextArea;
 	private JTextArea cfuTextArea;
 	private JTextArea votoTextArea;
@@ -58,12 +54,8 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 		layout = new GridBagLayout();
 		setLayout(layout);
 		
-		lblNome = new JLabel("Nome:");
-		nomeTextArea = new JTextArea(1, 15);
-		lblCognome = new JLabel("Cognome:");
-		cognomeTextArea = new JTextArea(1, 15);
-		lblMatricola = new JLabel("Matricola:");
-		matricolaTextArea = new JTextArea(1, 15);
+		lblNomeStudente = new JLabel("Nome Completo:");
+		nomeStudenteTextArea = new JTextArea(1, 15);
 		lblMateria = new JLabel("Materia:");
 		materiaTextArea = new JTextArea(1, 15);
 		lblCfu = new JLabel("CFU:");
@@ -77,10 +69,8 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 		btnConferma.addActionListener(this);
 		
 		
-		nomeTextArea.setBorder(new LineBorder(Color.BLACK, 1));
-		cognomeTextArea.setBorder(new LineBorder(Color.BLACK, 1));
+		nomeStudenteTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		materiaTextArea.setBorder(new LineBorder(Color.BLACK, 1));
-		matricolaTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		cfuTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		votoTextArea.setBorder(new LineBorder(Color.BLACK, 1));
 		
@@ -89,69 +79,46 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(lblNome, gbc);
+		add(lblNomeStudente, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		gbc.gridy = 0;
-		add(nomeTextArea, gbc);
-		
-		gbc.gridwidth = 1;
-		gbc.gridx = 0; 
-		gbc.gridy = 1;
-		add(lblCognome, gbc);
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		add(cognomeTextArea, gbc);
-
-		gbc.gridwidth = 1;
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		add(lblMatricola, gbc);
-		gbc.gridwidth = 2;
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		add(matricolaTextArea, gbc);
+		add(nomeStudenteTextArea, gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 1;
 		add(lblMateria, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		gbc.gridy = 3;
 		add(materiaTextArea, gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 2;
 		add(lblCfu, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		gbc.gridy = 4;
 		add(cfuTextArea, gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 3;
 		add(lblVoto, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		gbc.gridy = 5;
 		add(votoTextArea, gbc);
 		
 		gbc.gridwidth = 1;
 		gbc.gridx = 0;
-		gbc.gridy = 6;
+		gbc.gridy = 4;
 		add(lblLode, gbc);
 		gbc.gridwidth = 2;
 		gbc.gridx = 1;
-		gbc.gridy = 6;
 		add(lodeCheckbox, gbc);
 		
 		gbc.gridwidth = 3;
 		gbc.gridx = 0;
-		gbc.gridy = 7;
+		gbc.gridy = 5;
 		add(btnConferma, gbc);
 		
 	}
@@ -165,10 +132,7 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 	}
 	
 	public void sendFormToView() {
-		int id = 0;
 		String nome = null;
-		String cognome = null;
-		int matricola = 0;
 		String materia = null;
 		int cfu = 0;
 		float voto = 0;
@@ -177,9 +141,7 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 		try {
 			checkForNullComponents();
 			
-			nome = nomeTextArea.getText();
-			cognome = cognomeTextArea.getText();
-			matricola = Integer.parseInt(matricolaTextArea.getText());
+			nome = nomeStudenteTextArea.getText();
 			materia = materiaTextArea.getText();
 			cfu = Integer.parseInt(cfuTextArea.getText());
 			voto = Float.parseFloat(votoTextArea.getText());
@@ -187,7 +149,7 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 			
 			checkVotoValidity(voto, lode);
 	
-			Esame esame = new EsameSemplice(matricola, nome, cognome, materia, cfu, voto, lode);
+			Esame esame = new EsameSemplice(nome, materia, cfu, voto, lode);
 			view.getController().editEsame(esame);
 			
 			//chiudi finestra alla fine
@@ -219,24 +181,10 @@ public class EsameSemplicePopUpPanel extends JPanel implements ActionListener {
 	}
 
 	public JTextArea getNomeTextArea() {
-		return nomeTextArea;
+		return nomeStudenteTextArea;
 	}
 	public void setNomeTextArea(JTextArea nomeTextArea) {
-		this.nomeTextArea = nomeTextArea;
-	}
-
-	public JTextArea getCognomeTextArea() {
-		return cognomeTextArea;
-	}
-	public void setCognomeTextArea(JTextArea cognomeTextArea) {
-		this.cognomeTextArea = cognomeTextArea;
-	}
-
-	public JTextArea getMatricolaTextArea() {
-		return matricolaTextArea;
-	}
-	public void setMatricolaTextArea(JTextArea matricolaTextArea) {
-		this.matricolaTextArea = matricolaTextArea;
+		this.nomeStudenteTextArea = nomeTextArea;
 	}
 
 	public JTextArea getMateriaTextArea() {
