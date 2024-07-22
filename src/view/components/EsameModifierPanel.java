@@ -298,7 +298,8 @@ public class EsameModifierPanel extends JPanel implements ActionListener {
 			if (votoFinaleAggiornato < 30) {
 				lodeCheckbox.setSelected(false);
 				lodeCheckbox.setEnabled(false);
-			}
+			} else {
+				lodeCheckbox.setEnabled(true);			}
 			
 			confermaBtn.setEnabled(true);
 		} catch (Exception err) {
