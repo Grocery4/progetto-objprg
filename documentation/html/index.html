@@ -28,6 +28,7 @@
  </tbody>
 </table>
 </div>
+
 <!-- end header part -->
 <!-- Generato da Doxygen 1.9.1 -->
 <script type="text/javascript">
@@ -65,6 +66,42 @@ $(function() {
 <div class="title">Tesina Programmazione ad Oggetti 2023/2024 Documentazione</div>  </div>
 </div><!--header-->
 <div class="contents">
+  <div id="myDiv">
+    <h2>Requisiti</h2>
+    <p>Per il corretto funzionamento del progetto è necessario includere i file .jar inerenti la creazione e gestione dei grafici.
+      In particolare, i file necessari sono:</p>
+  
+    <ul>
+      <li>jcommon-1.0.23.jar</li>
+      <li>jfreechart-1.0.19.jar</li>
+      <li>jfreechart-1.0.19-swt.jar</li>
+    </ul>
+  
+    <p>Reperibili sul sito ufficiale della libreria: <a href ="https://jfree.org/jfreechart/">jfree.org</a></p>
+    
+  
+    <h2>Esecuzione del programma</h2>
+    <p>Per eseguire il programma è necessario prima compilare i file .java e successivamente eseguire il file principale contenente il metodo main.
+      All'interno della directory del progetto sono presenti due script .bash che facilitano le due operazioni citate precedentemente.</p>
+  
+    <p>compile.bash:</p>
+    <code>
+      # -d: specifica dove piazzare i file .class generati dalla compilazione <br>
+      # -cp specifica dove trovare le dipendenze del programma (.jar) <br>
+      # <A.java> <B.java>.. : specifica quali sono i file target della compilazione <br>
+      <b>javac -d ./bin -cp ./lib/*:. src/App.java src/controller/Controller.java src/view/View.java src/view/components/*.java src/view/errors/*.java src/model/*.java src/model/esami/*.java</b>
+    </code>
+  
+    <p>execute.bash:</p>
+    <code>
+      # -cp: specfica dove trovare i file generati e le loro dipendenze. <br>
+      # : è il separatore tra le varie directory <br>
+      <b>java -cp bin/:./lib/*:. App</b>
+    </code>
+  
+  </div>
+
+
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
