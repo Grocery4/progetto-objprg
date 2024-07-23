@@ -1,4 +1,4 @@
-# progetto-objprg
+# OOP Exam Manager Project
 
 ## About
 Project created for the Object Oriented Programming exam at the University of Modena and Reggio Emilia (UNIMORE).
